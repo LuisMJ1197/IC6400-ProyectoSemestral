@@ -1,1 +1,102 @@
-<p>mainmenu works!</p>
+<div id="main">
+    <div id="logo-div">
+        <img id="logo" src="../../assets/images/logo2.png">
+    </div>
+    <div id="menu-div">
+        <div id="first-line">
+            <div class="hexagon color-1" (click)="router.navigate(['floyd'])"
+            tooltip="Algoritmo de Floyd para averiguar la ruta más corta entre un conjunto de nodos." flow="left">
+                <div class="hex-outer h1"></div>
+                <div class="hex-outer h2"></div>
+                <div class="hex-outer h3"></div>
+                <div class="hex-inner h1"></div>
+                <div class="hex-inner h2"></div>
+                <div class="hex-inner h3"></div>
+                <div class="content">
+                    <span class="option-icon flaticon-delivery"></span>
+                    <div class="option-text">Ruta más corta</div>
+                </div>
+            </div>
+            <div class="hexagon color-2" (click)="router.navigate(['mochila'])"
+            tooltip="Algoritmo para resolver el problema de la mochila, considerando los pesos y costos de los objetos." flow="up">
+                <div class="hex-outer h1"></div>
+                <div class="hex-outer h2"></div>
+                <div class="hex-outer h3"></div>
+                <div class="hex-inner h1"></div>
+                <div class="hex-inner h2"></div>
+                <div class="hex-inner h3"></div>
+                <div class="content">
+                    <span class="option-icon flaticon-backpack"></span>
+                    <div class="option-text">Problema de la mochila</div>
+                </div>
+            </div>
+            <div class="hexagon color-1" (click)="router.navigate(['reemplazoequipos'])"
+            tooltip="Algoritmo para resolver el problema del reemplazo de equipos." flow="right">
+                <div class="hex-outer h1"></div>
+                <div class="hex-outer h2"></div>
+                <div class="hex-outer h3"></div>
+                <div class="hex-inner h1"></div>
+                <div class="hex-inner h2"></div>
+                <div class="hex-inner h3"></div>
+                <div class="content">
+                    <span class="option-icon flaticon-exchange"></span>
+                    <div class="option-text">Reemplazo de equipos</div>
+                </div>
+            </div>
+        </div>
+        <div id="second-line">
+            <div class="hexagon color-3" (click)="router.navigate(['arbolesbinarios'])"
+            tooltip="Algoritmo para encontrar el árbol binario de búsqueda óptimo dado un conjunto de llaves y sus respectivas probabilidades de búsqueda." flow="down">
+                <div class="hex-outer h1"></div>
+                <div class="hex-outer h2"></div>
+                <div class="hex-outer h3"></div>
+                <div class="hex-inner h1"></div>
+                <div class="hex-inner h2"></div>
+                <div class="hex-inner h3"></div>
+                <div class="content">
+                    <span class="option-icon flaticon-hierarchical-structure"></span>
+                    <div class="option-text">Árboles binarios de búsqueda óptimos</div>
+                </div>
+            </div>
+            <div class="hexagon color-4" (click)="router.navigate(['seriesdeportivas'])"
+            tooltip="Algoritmo para averiguar la probabilidad de que un equipo gane una serie deportiva." flow="down">
+                <div class="hex-outer h1"></div>
+                <div class="hex-outer h2"></div>
+                <div class="hex-outer h3"></div>
+                <div class="hex-inner h1"></div>
+                <div class="hex-inner h2"></div>
+                <div class="hex-inner h3"></div>
+                <div class="content">
+                    <span class="option-icon flaticon-basketball"></span>
+                    <div class="option-text">Series deportivas</div>
+                </div>
+            </div>
+            <div class="hexagon color-4" (click)="router.navigate(['multiplicacionmatrices'])"
+            tooltip="Algoritmo para encontrar la secuencia de multiplicaciones de matrices que menos multiplicaciones requiera." flow="down">
+                <div class="hex-outer h1"></div>
+                <div class="hex-outer h2"></div>
+                <div class="hex-outer h3"></div>
+                <div class="hex-inner h1"></div>
+                <div class="hex-inner h2"></div>
+                <div class="hex-inner h3"></div>
+                <div class="content">
+                    <span class="option-icon flaticon-matrix"></span>
+                    <div class="option-text">Multiplicación de matrices</div>
+                </div>
+            </div>
+            <div class="hexagon color-3" (click)="router.navigate(['loggedout'])">
+                <div class="hex-outer h1"></div>
+                <div class="hex-outer h2"></div>
+                <div class="hex-outer h3"></div>
+                <div class="hex-inner h1"></div>
+                <div class="hex-inner h2"></div>
+                <div class="hex-inner h3"></div>
+                <div class="content">
+                    <span class="option-icon flaticon-exit"></span>
+                    <div class="option-text">Salir</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copy">Icons made by <a href="https://www.flaticon.local/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.local/" title="Flaticon">www.flaticon.local</a></div>
+</div>
