@@ -138,3 +138,15 @@ p > a:hover {
   top: 0;
   width: 70%;
 }
+
+@media (orientation: portrait) {
+    #logo-div {
+      margin: 0;
+      height: 20%;
+    }
+  
+    #logo {
+      height: 60px;
+      width: 75%;
+    }
+}

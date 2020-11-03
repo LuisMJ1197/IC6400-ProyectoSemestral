@@ -12,6 +12,7 @@ import { SeriesdeportivasComponent } from './algorithms/seriesdeportivas/seriesd
 import { MatricesComponent } from './algorithms/matrices/matrices.component';
 import { NotimplementedComponent } from './notimplemented/notimplemented.component';
 import { LoggedoutComponent } from './loggedout/loggedout.component';
+import { HeaderMenuComponent } from './header-menu/header-menu.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LoggedoutComponent } from './loggedout/loggedout.component';
     SeriesdeportivasComponent,
     MatricesComponent,
     NotimplementedComponent,
-    LoggedoutComponent
+    LoggedoutComponent,
+    HeaderMenuComponent
   ],
   imports: [
     BrowserModule,

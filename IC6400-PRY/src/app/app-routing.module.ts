@@ -8,7 +8,6 @@ import { ReemplazoequiposComponent } from './algorithms/reemplazoequipos/reempla
 import { SeriesdeportivasComponent } from './algorithms/seriesdeportivas/seriesdeportivas.component';
 import { LoggedoutComponent } from './loggedout/loggedout.component';
 import { MainmenuComponent } from './mainmenu/mainmenu.component';
-import { NotimplementedComponent } from './notimplemented/notimplemented.component';
 
 const routes: Routes = [
   {

@@ -2,7 +2,7 @@
     <div id="logo-div">
         <img id="logo" src="../../assets/images/logo2.png">
     </div>
-    <div id="menu-div">
+    <div id="menu-div-landscape">
         <div id="first-line">
             <div class="hexagon color-1" (click)="router.navigate(['floyd'])"
             tooltip="Algoritmo de Floyd para averiguar la ruta más corta entre un conjunto de nodos." flow="left">
@@ -96,6 +96,36 @@
                     <div class="option-text">Salir</div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="menu-div-portrait">
+        <div class="portrait-menu-option" (click)="router.navigate(['floyd'])">
+            <span class="option-icon flaticon-delivery"></span>
+            <p>Ruta más corta</p>
+        </div>
+        <div class="portrait-menu-option" (click)="router.navigate(['mochila'])">
+            <span class="option-icon flaticon-backpack"></span>
+            <p>Problema de la mochila</p>
+        </div>
+        <div class="portrait-menu-option" (click)="router.navigate(['reemplazoequipos'])">
+            <span class="option-icon flaticon-exchange"></span>
+            <p>Reemplazo de equipos</p>
+        </div>
+        <div class="portrait-menu-option" (click)="router.navigate(['arbolesbinarios'])">
+            <span class="option-icon flaticon-hierarchical-structure"></span>
+            <p>Árboles binarios de búsqueda óptimos</p>
+        </div>
+        <div class="portrait-menu-option" (click)="router.navigate(['seriesdeportivas'])">
+            <span class="option-icon flaticon-basketball"></span>
+            <p>Series deportivas</p>
+        </div>
+        <div class="portrait-menu-option" (click)="router.navigate(['multiplicacionmatrices'])">
+            <span class="option-icon flaticon-matrix"></span>
+            <p>Multiplicación de matrices</p>
+        </div>
+        <div class="portrait-menu-option" (click)="router.navigate(['loggedout'])">>
+            <span class="option-icon flaticon-exit"></span>
+            <p>Salir</p>
         </div>
     </div>
     <div class="copy">Icons made by <a href="https://www.flaticon.local/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.local/" title="Flaticon">www.flaticon.local</a></div>
