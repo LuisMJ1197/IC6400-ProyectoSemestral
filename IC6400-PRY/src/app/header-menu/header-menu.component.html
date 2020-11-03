@@ -1,0 +1,81 @@
+<header>
+    <img (click)="go('')" src="../../assets/images/Logo.png">
+    <div class="hamburger-menu">
+        <input id="menu__toggle" type="checkbox" />
+        <label class="menu__btn" for="menu__toggle">
+            <span></span>
+        </label>
+        
+        <ul class="menu__box">
+            <img (click)="go('')" class="logo-up" src="../../assets/images/Logo.png">
+            <li>
+                <a (click)="go('floyd')" class="menu__item">
+                    <span class="option-icon flaticon-delivery"></span>
+                    <p>Ruta más corta</p>
+                </a>
+            </li>
+            <li>
+                <a (click)="go('mochila')" class="menu__item">
+                    <span class="option-icon flaticon-backpack"></span>
+                    <p>Problema de la mochila</p>
+                </a>
+            </li>
+            <li>
+                <a (click)="go('reemplazoequipos')" class="menu__item">
+                    <span class="option-icon flaticon-exchange"></span>
+                    <p>Reemplazo de equipos</p>
+                </a>
+            </li>
+            <li>
+                <a (click)="go('arbolesbinarios')" class="menu__item">
+                    <span class="option-icon flaticon-hierarchical-structure"></span>
+                    <p>Árboles binarios de búsqueda óptimos</p>
+                </a>
+            </li>
+            <li>
+                <a (click)="go('seriesdeportivas')" class="menu__item">
+                    <span class="option-icon flaticon-basketball"></span>
+                    <p>Series deportivas</p>
+                </a>
+            </li>
+            <li>
+                <a (click)="go('multiplicacionmatrices')" class="menu__item">
+                    <span class="option-icon flaticon-matrix"></span>
+                    <p>Multiplicación de matrices</p>
+                </a>
+            </li>
+            <li>
+                <a (click)="go('loggedout')" class="menu__item">
+                    <span class="option-icon flaticon-exit"></span>
+                    <p>Salir</p>
+                </a>
+            </li>
+            <img (click)="go('')" class="logo-down" src="../../assets/images/Logo.png">
+        </ul>
+    </div>
+</header>
+<div *ngIf="message" class="modal" id="modal" tabindex="-1" role="dialog" style="display:block!important">    
+    <div class="modal-dialog custom-alert" role="document">    
+        <div class="modal-content">    
+            <div class="modal-body">    
+                <div class="row">    
+                    <div class="col-md-12">    
+                        <p class="text-center confirm-message">¿Está seguro que desea continuar?<br>Perderá todo la información suministrada.</p>    
+                    </div>    
+                </div>    
+                <div class="row">    
+                    <div class="col-md-12">    
+                        <p class="confirm-button">    
+                            <a (click)="goRoute()">    
+                                <button class="btn btn-yes">Sí</button>    
+                            </a>    
+                            <a (click)="message = false">    
+                                <button class="btn btn-no">No</button>    
+                            </a>    
+                        </p>    
+                    </div>    
+                </div>    
+            </div>    
+        </div>    
+    </div>    
+</div>   
