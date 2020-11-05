@@ -13,6 +13,7 @@ import { MatricesComponent } from './algorithms/matrices/matrices.component';
 import { NotimplementedComponent } from './notimplemented/notimplemented.component';
 import { LoggedoutComponent } from './loggedout/loggedout.component';
 import { HeaderMenuComponent } from './header-menu/header-menu.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HeaderMenuComponent } from './header-menu/header-menu.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
