@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 28/10/2020 23:04
+    Creation date: 05/11/2020 19:20
     */
 
     @font-face {
@@ -47,6 +47,8 @@
 .flaticon-locator:before { content: "\f107"; }
 .flaticon-matrix:before { content: "\f108"; }
 .flaticon-exit:before { content: "\f109"; }
+.flaticon-sigma:before { content: "\f10a"; }
+.flaticon-list:before { content: "\f10b"; }
     
     $font-Flaticon-basketball-ball: "\f100";
     $font-Flaticon-basketball: "\f101";
@@ -58,3 +60,5 @@
     $font-Flaticon-locator: "\f107";
     $font-Flaticon-matrix: "\f108";
     $font-Flaticon-exit: "\f109";
+    $font-Flaticon-sigma: "\f10a";
+    $font-Flaticon-list: "\f10b";

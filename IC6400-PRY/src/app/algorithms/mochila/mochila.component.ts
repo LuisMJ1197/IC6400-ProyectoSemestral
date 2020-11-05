@@ -1,12 +1,15 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { getMaxListeners } from 'process';
+import { Component, OnInit } from '@angular/core';
+import { BoundedKnapsack } from './logic/bounded-knapsack';
+import { Knapsack01 } from './logic/knapsack01';
+import { UnboundedKnapsack } from './logic/unbounded-knapsack';
 
-type KObject = {
+export type KObject = {
 	id: number,
 	cost: number,
 	value: number,
 	quantity: number,
-	selected: boolean
+	selected: boolean,
+	count: number
 }
 
 @Component({
@@ -24,6 +27,8 @@ export class MochilaComponent implements OnInit {
 	matrix: number[][] = [];
 	matrixX: number[][] = [];
 	selectedFile: any;
+	listView: boolean = true;
+
 	constructor() {
 	}
 
@@ -45,11 +50,20 @@ export class MochilaComponent implements OnInit {
 		this.knapsackSize = file.knapsackSize;
 		this.items = file.items;
 		this.kind = file.kind;
-
+		// Updating items to not-selected
+		this.items.forEach((item) => {
+			item.selected = false;
+			if (item.quantity == null) item.quantity = Infinity;
+			item.count = 0;
+		});
 		// Creating matrix T
-		this.matrix = new Array(this.knapsackSize + 1)
-			.fill(new Array(this.items.length).fill(0) as number[]);
-		
+		this.matrix = [];
+		this.matrixX = [];
+		var i: number = 0;
+		for (i = 0; i < this.knapsackSize + 1; i++) {
+			this.matrix.push(new Array(this.items.length).fill(0) as number[]);
+			this.matrixX.push(new Array(this.items.length).fill(0) as number[]);
+		}
 	}
 
 	saveFile() {
@@ -92,7 +106,14 @@ export class MochilaComponent implements OnInit {
 	}
 
 	addItem() {
-		this.items.push({ id: this.items.length, cost: 0, value: 0, quantity: this.getQuantity(), selected: false} as KObject);
+		this.items.push({ 
+			id: this.items.length, 
+			cost: 0, 
+			value: 0, 
+			quantity: this.getQuantity(), 
+			selected: false,
+			count: 0
+		} as KObject);
 		this.matrix.forEach((row) => {
 			row.push(0);
 		});
@@ -116,19 +137,10 @@ export class MochilaComponent implements OnInit {
 	}
 
 	changeKind() {
-		if (this.kind == 0) {
-			this.items.forEach((item) => {
-				item.quantity = 1;
-			});
-		} else if (this.kind == 1) {
-			this.items.forEach((item) => {
-				item.quantity = 1;
-			});
-		} else {
-			this.items.forEach((item) => {
-				item.quantity = Infinity;
-			});
-		}
+		var quantity = this.kind != 2 ? 1 : Infinity;
+		this.items.forEach((item) => {
+			item.quantity = quantity;
+		});
 	}
 
 	executeAlgorithm() {
@@ -136,94 +148,12 @@ export class MochilaComponent implements OnInit {
 		var X: number[][] = this.matrixX;
 		var n: number = this.items.length;
 		var C: number = this.matrix.length;
-		console.log(this.items);
 		if (this.kind == 0) {
-			this.execute01(T, X, n, C);
+			new Knapsack01(T, X, n, C, this.items).execute();
+		} else if (this.kind == 1) {
+			new BoundedKnapsack(T, X, n, C, this.items).execute();
 		} else {
-			this.executeGeneral(T, X, n, C);
-		}
-
-
-	}
-
-	execute01(T: number[][], X: number[][], n: number, C: number) {
-		var j: number;
-		for (j = 0; j < n; j++) {
-			var i: number;
-			for (i = 0; i < C; i++) {
-				if (i == 0) {
-					T[i][j] = 0;
-					X[i][j] = 0;
-				} else {
-					if (j == 0) {
-						if ((Number(i) - Number(this.items[j].cost)) >= 0) {
-							T[i][j] = this.items[j].value;
-							X[i][j] = 1;
-						} else {
-							T[i][j] = 0;
-							X[i][j] = 0;
-						}
-					} else {
-						if ((i - this.items[j].cost) >= 0) {
-							var pX = [T[i][j - 1]];
-							pX.push(Number(this.items[j].value) + Number(T[i - this.items[j].cost][j - 1]));
-							var result = this.getMax(pX);
-							T[i][j] = result;
-							X[i][j] = pX.indexOf(result);
-						} else {
-							T[i][j] = T[i][j - 1]
-							X[i][j] = 0
-						}
-					}
-				}
-			}
-		}
-		this.getItemsSelected(X);
-	}
-
-	executeGeneral(T: number[][], X: number[][], n: number, C: number) {
-		var j: number;
-		for (j = 0; j < n; j++) {
-			var i: number;
-			for (i = 0; i < C; i++) {
-				if (i == 0) {
-					T[i][j] = 0;
-					X[i][j] = 0;
-				} else {
-					if (this.items[j].quantity > 0) {
-						if (j == 0) {
-							if ((Number(i) - Number(this.items[j].cost)) >= 0) {
-								if (this.items[j].quantity == Infinity) {
-									X[i][j] = Math.floor(Number(i) / Number(this.items[j].cost));
-									T[i][j] = this.items[j].value * X[i][j];
-								} else {
-									var x = 1;
-									while (x <= this.items[j].quantity) {
-										x += 1;	
-									}
-									X[i][j] = x;
-									T[i][j] = this.items[j].value * x;
-								}
-							} else {
-								T[i][j] = 0;
-								X[i][j] = 0;
-							}
-						} else {
-							// getting possibles x
-							var x = 1;
-							var pX = [T[i][j - 1]];
-							var maxX = this.items[j].quantity;
-							while ((i - (x * this.items[j].cost) >= 0) && (x <= maxX || maxX == Infinity)) {
-								pX.push(x * Number(this.items[j].value) + Number(T[i - (x * this.items[j].cost)][j - 1]));
-								x += 1;
-							}
-							var result = this.getMax(pX);
-							T[i][j] = result;
-							X[i][j] = pX.indexOf(result);
-						}
-					}
-				}
-			}
+			new UnboundedKnapsack(T, X, n, C, this.items).execute();
 		}
 		this.getItemsSelected(X);
 	}
@@ -232,21 +162,27 @@ export class MochilaComponent implements OnInit {
 		var i = X.length - 1;
 		var j = this.items.length - 1;
 		while(j >= 0) {
-			if (X[i][j] != 0) this.items[j].selected = true;
-			else this.items[j].selected = false; 
+			this.items[j].selected = X[i][j] != 0;
+			this.items[j].count = X[i][j];
 			i = i - X[i][j] * this.items[j].cost;
 			j -= 1;
 		}
 	}
 
-	getMax(arrayL: number[]): number {
-		var maxFound = arrayL[0];
-		arrayL.forEach((value) => {
-			if (value > maxFound) {
-				maxFound = value;
-			}
-		});
-		return maxFound;
+	validateCost(item) {
+		if (item.cost == "") {
+			item.cost = 0;
+		}
 	}
 
+	validateValue(item) {
+		if (item.value == "") {
+			item.value = 0;
+		}
+	}
+	validateQuantity(item) {
+		if (item.quantity == "") {
+			item.quantity = this.kind != 2 ? 1 : Infinity;
+		}
+	}
 }

@@ -221,28 +221,65 @@
     display: block;
 }
 
-.a-content.left .config.item-list #item-list{
+.a-content.left .config.item-list .object-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.a-content.left .config.item-list .object-list button {
+    background-color: var(--blue-grey);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    top: 0;
+    height: 30px;
+    width: 30px;
+}
+
+.a-content.left .config.item-list .object-list button:focus {
+    outline: none;
+}
+
+.a-content.left .config.item-list .view {
     display: block;
     margin-left: 15px;
     margin-top: 15px;
 }
 
-.a-content.left .config.item-list #item-list .item {
+.a-content.left .config.item-list .view#item-list .item {
     height: 35px;
     display: block;
 }
 
-.a-content.left .config.item-list #item-list .item > * {
+.a-content.left .config.item-list .view#item-list .item > * {
     display: inline-block;
 }
 
-.a-content.left .config.item-list #item-list .item .item-config > * {
+.a-content.left .config.item-list .view#item-list .item .item-config > * {
     display: inline-block;
     margin-left: 15px;
 }
 
-.a-content.left .config.item-list #item-list .item .item-config input {
+.a-content.left .config.item-list .view#item-list .item .item-config input {
     width: 50px;
+}
+
+.a-content.left .config.item-list .view#solution .problem {
+    margin-left: 15px;
+    display: block;
+    justify-content: left;
+    word-wrap: break-word;
+    width: 80%;
+    height: 50px;
+}
+
+.a-content.left .config.item-list .view#solution .problem div {
+    display: inline-block;
+}
+
+.a-content.left .config.item-list .view#solution .problem div p {
+    display: inline-block;
 }
 
 .a-content.left .config p, .a-content.left .config .spinner {
