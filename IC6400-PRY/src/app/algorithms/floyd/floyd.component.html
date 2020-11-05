@@ -1,1 +1,44 @@
-<app-notimplemented></app-notimplemented>
+<app-header-menu></app-header-menu>
+<div id="main">
+    <div id="algorithm-header">
+        <div class="first algorithm-comp">
+            <span class="algor-icon flaticon-delivery"></span>
+            <p>Ruta más corta</p>
+        </div>
+        <div class="last algorithm-comp">
+            <div class="button load">
+                <span class="label">
+                    <i class="fas fa-upload" ></i>Cargar archivo
+                </span>
+                <input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File"
+                    (change)="onFileSelect($event)">
+            </div>
+            <button id="save-button" type="button" class="button save" (click)="saveFile()">
+                <i class="fas fa-save"></i>Guardar archivo
+            </button>
+        </div>
+    </div>
+    <div id="algorithm-content">
+        <div class="a-content left">
+            <div class="config">
+                <p>Cantidad de nodos: </p>
+                <div class="spinner">
+                    <div class="plusminus horiz">
+                        <button [disabled]="nodes.length == 0" (click)="removeNode()"></button>
+                        <input disabled type="number" name="productQty" value="0" min="0" max="maxNodeCount"
+                            [(ngModel)]="nodes.length">
+                        <button [disabled]="nodes.length == maxNodeCount" (click)="addNode()"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="exec-button">
+                <button type="button" class="button exec" (click)="executeAlgorithm()">
+                    Ejecutar algoritmo
+                </button>
+            </div>
+        </div>
+        <div class="a-content right">
+            
+        </div>
+    </div>
+</div>

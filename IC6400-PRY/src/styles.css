@@ -16,3 +16,112 @@ body {
     --light-black: #222629;
     --white: #FFFFFF;
   }
+
+  /* From https://codepen.io/tobyj/pen/vGbpPj*/
+.plusminus {
+    margin-left: 15px;    
+    display: inline-block;
+    position: relative;
+    font-size: 0;
+    overflow: hidden;
+    border-radius: 3px;
+    width: 30px;
+    height: 90px;
+  }
+
+  .plusminus button {
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--light-black);
+    color: var(--very-light-grey);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    -moz-transition: color 200ms;
+    -o-transition: color 200ms;
+    -webkit-transition: color 200ms;
+    transition: color 200ms;
+  }
+
+  .plusminus button:hover {
+      background-color: var(--light-grey);
+      transition: color 200ms;
+      color: var(--light-black);
+  }
+
+  .plusminus button:focus {
+    outline: none;
+    color: var(--blue-grey);
+  }
+  .plusminus button:disabled {
+    background: #999;
+    color: #ccc;
+    cursor: default;
+  }
+  .plusminus button:first-child {
+    bottom: 0;
+  }
+  .plusminus button:first-child:before {
+    content: "-";
+  }
+  .plusminus button:last-child {
+    top: 0;
+  }
+  .plusminus button:last-child:before {
+    content: "+";
+  }
+  .plusminus button:last-child:focus {
+    color: var(--orange);
+  }
+  .plusminus input[type="number"] {
+    position: absolute;
+    width: 40px;
+    height: 30px;
+    top: 30px;
+    margin: 0;
+    padding: 0 0 16.92308px;
+    border: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    background-color: white;
+    padding-top: 15px;
+    -moz-appearance: textfield;
+    color: var(--light-black);
+  }
+
+  .plusminus input[type="number"]:focus {
+      outline: none;
+  }
+
+  .plusminus input[type="number"]::-webkit-outer-spin-button, .plusminus input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .plusminus.horiz {
+    width: 100px;
+    height: 30px;
+  }
+  .plusminus.horiz button:first-child {
+    left: 0;
+  }
+  .plusminus.horiz button:last-child {
+    right: 0;
+  }
+  .plusminus.horiz:after {
+    bottom: 0;
+  }
+  .plusminus.horiz input[type="number"] {
+    position: absolute;
+    top: 0;
+    left: 30px;
+  }
+
+
+  /* Dropdown */
