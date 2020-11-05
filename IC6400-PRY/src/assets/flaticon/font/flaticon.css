@@ -1,3 +1,8 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 05/11/2020 19:20
+  	*/
+
 @font-face {
   font-family: "Flaticon";
   src: url("./Flaticon.eot");
@@ -20,8 +25,7 @@
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
   font-family: Flaticon;
-        
-font-style: normal;
+  font-style: normal;
 }
 
 .flaticon-basketball-ball:before { content: "\f100"; }
@@ -34,3 +38,5 @@ font-style: normal;
 .flaticon-locator:before { content: "\f107"; }
 .flaticon-matrix:before { content: "\f108"; }
 .flaticon-exit:before { content: "\f109"; }
+.flaticon-sigma:before { content: "\f10a"; }
+.flaticon-list:before { content: "\f10b"; }

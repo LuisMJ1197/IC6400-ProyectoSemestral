@@ -1,1 +1,140 @@
-<app-notimplemented></app-notimplemented>
+<app-header-menu></app-header-menu>
+<div id="main">
+    <div id="algorithm-header">
+        <div class="first algorithm-comp">
+            <span class="algor-icon flaticon-backpack"></span>
+            <p>Problema de la mochila</p>
+        </div>
+        <div class="last algorithm-comp">
+            <div class="button load">
+                <span class="label">
+                    <i class="fas fa-upload" ></i>Cargar archivo
+                </span>
+                <input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File"
+                    (change)="onFileSelect($event)">
+            </div>
+            <button id="save-button" type="button" class="button save" (click)="saveFile()">
+                <i class="fas fa-save"></i>Guardar archivo
+            </button>
+        </div>
+    </div>
+    <div id="algorithm-content">
+        <div class="a-content left">
+            <div id="knapsack-kind">
+                <label for="kinds">Tipo: </label>
+                <select name="kinds" id="kinds" style="margin-left: 15px;" [(ngModel)]="kind"
+                (change)="changeKind()">
+                    <option value="0" selected>0/1 Knapsack</option>
+                    <option value="1">Boudned Knapsack</option>
+                    <option value="2">Unbounded Knapsack</option>
+                  </select>
+            </div>
+            <div class="config">
+                <p>Capacidad de la mochila: </p>
+                <div class="spinner">
+                    <div class="plusminus horiz">
+                        <button [disabled]="knapsackSize == 0" (click)="removeCapacity()"></button>
+                        <input disabled type="number" name="productQty" value="0" min="0" max="maxKnapsackSize"
+                            [(ngModel)]="knapsackSize">
+                        <button [disabled]="knapsackSize == maxKnapsackSize" (click)="addCapacity()"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="config">
+                <p>Cantidad de objetos: </p>
+                <div class="spinner">
+                    <div class="plusminus horiz">
+                        <button [disabled]="items.length == 0" (click)="removeItem()"></button>
+                        <input disabled type="number" name="productQty" value="0" min="0" max="maxItemCount"
+                            [(ngModel)]="items.length">
+                        <button [disabled]="items.length == maxItemCount" (click)="addItem()"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="config item-list">
+                <div class="object-list">
+                    <p>Lista de objetos:</p>
+                    <button class="change-view" *ngIf="listView" (click)="listView = false">
+                        <i class="flaticon-sigma"></i>
+                    </button>
+                    <button class="change-view" *ngIf="!listView" (click)="listView = true">
+                        <i class="flaticon-list"></i>
+                    </button>
+                </div>
+                <div class="view" id="item-list" *ngIf="listView">
+                    <div class="item" *ngFor="let item of items">
+                        <p>Item <strong>#{{item.id}} &#x2192; </strong></p>
+                        <div class="item-config cost">
+                            <p>C<sub>{{item.id}}:</sub></p>
+                            <input placeholder="C"
+                                name="C" [(ngModel)]="item.cost" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 190'
+                                (change)="validateCost(item)">
+                        </div>
+                        <div class="item-config value">
+                            <p>V<sub>{{item.id}}</sub>:</p>
+                            <input placeholder="V"
+                                name="V" [(ngModel)]="item.value" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                (change)="validateValue(item)">
+                        </div>
+                        <div class="item-config cant">
+                            <p>Q<sub>{{item.id}}</sub>:</p>
+                            <input [disabled]="kind == 0 || kind == 2" placeholder="Q"
+                                name="Q" [(ngModel)]="item.quantity" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                (change)="validateQuantity(item)">
+                        </div>
+                    </div>
+                </div>
+                <div class="view" id="solution" *ngIf="!listView">
+                    <p>Problema: </p>
+                    <div class="problem">max <strong>Z</strong> = 
+                        <div *ngFor="let item of items">
+                            {{item.value}}x<sub>{{item.id}}</sub> <p *ngIf="item.id != items.length - 1"> + </p>
+                        </div>
+                    </div>
+                    <div class="problem">Sujeto a: 
+                        <div *ngFor="let item of items">
+                            {{item.cost}}x<sub>{{item.id}}</sub> <p *ngIf="item.id != items.length - 1"> + </p>
+                        </div>
+                        &#x2264;{{knapsackSize}}
+                    </div>
+                    <p>Solución: </p>
+                    <div class="problem">&#123;
+                        <div *ngFor="let item of items">
+                            x<sub>{{item.id}}</sub> = {{item.count}}<p *ngIf="item.id != items.length - 1"> , </p>
+                        </div>
+                        &#125;
+                    </div>
+                </div>
+            </div>
+            <div class="exec-button">
+                <button type="button" class="button exec" (click)="executeAlgorithm()">
+                    Ejecutar algoritmo
+                </button>
+            </div>
+        </div>
+        <div class="a-content right">
+            <table style="width:100%">
+                <tr class="m-row header">
+                  <th class="m-head">Cap</th>
+                  <th class="m-head item" *ngFor="let item of items;">
+                      <p *ngIf="item.selected" class="selected">#{{item.id}}</p>
+                      <p *ngIf="!item.selected" class="not-selected">#{{item.id}}</p>
+                    </th>
+                </tr>
+                <tr class="m-row" *ngFor="let row of matrix ; let i = index">
+                    <td class="m-col">{{i}}</td>
+                    <td class="m-col value" *ngFor="let col of matrix[i] ; let j = index">
+                        <p *ngIf="kind == 0 && matrixX[i][j] == 0" class="matrix-value not-selected">{{col}}</p>
+                        <p *ngIf="kind == 0 && matrixX[i][j] != 0" class="matrix-value selected">{{col}}</p>
+                        <p *ngIf="kind != 0 && matrixX[i][j] == 0" class="matrix-value not-selected x-value">
+                            {{col}} <sub>x<sub>{{j}}</sub>={{matrixX[i][j]}}</sub>
+                        </p>
+                        <p *ngIf="kind != 0 && matrixX[i][j] != 0" class="matrix-value selected x-value">
+                            {{col}} <sub>x<sub>{{j}}</sub>={{matrixX[i][j]}}</sub>
+                        </p>
+                    </td>
+                </tr>
+              </table>
+        </div>
+    </div>
+</div>
