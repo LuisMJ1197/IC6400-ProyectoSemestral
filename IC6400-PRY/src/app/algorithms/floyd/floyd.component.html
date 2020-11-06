@@ -56,18 +56,19 @@
                     <div class="node-selection first-node">
                         <label for="first-nodes">De: </label>
                         <select name="first-node" id="first-node" style="margin-left: 15px;" [(ngModel)]="selectedFirstNode">
-                            <option value="0" *ngFor="let node of nodes">{{node.name}}</option>
+                            <option *ngFor="let node of nodes; let i = index"  value="{{i}}">{{node.name}}</option>
                         </select>
                     </div>
                     <div class="node-selection last-node">
                         <label for="last-nodes">Hacia: </label>
                         <select name="last-node" id="last-node" style="margin-left: 15px;" [(ngModel)]="selectedSecondNode">
-                            <option value="0" *ngFor="let node of nodes">{{node.name}}</option>
+                            <option *ngFor="let node of nodes; let i = index" value="{{i}}">{{node.name}}</option>
                         </select>
                     </div>
-                    <button type="button" class="button exec">
+                    <button type="button" class="button exec" (click)="getPath()">
                         Consultar
                     </button>
+                    <p>Ruta óptima: <strong>{{path}}</strong></p>
                 </div>
             </div>
             <div class="exec-button">
