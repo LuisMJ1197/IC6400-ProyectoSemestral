@@ -1,3 +1,9 @@
+/* 
+    GeneralKnapsack 
+    Permite la ejecución del algoritmo general de la mochila. Es una clase abstracta
+    la cual los algoritmos de 01Knapsack, BoundedKnapsack y UnboundedKnapsack deben extender
+    e implementar el método calculateValuesWhenFirstObject.
+*/
 export abstract class GeneralKnapsack {
     T: number[][];
     X: number[][];
@@ -5,6 +11,13 @@ export abstract class GeneralKnapsack {
     C: number;
     items: any[];
 
+    /*
+        T: tabla de ejecución.
+        X: tabla de x's, donde se sabe cuántos se llevan de cada uno.
+        n: cantidad de objetos
+        C: capacidad de la mochila.
+        items: la lista de objetos, estos deben tener costo, valor y cantidad disponible.
+    */
     constructor(T: number[][], X: number[][], n: number, C: number, items: any[]) {
         this.T = T;
         this.X = X;
@@ -46,8 +59,31 @@ export abstract class GeneralKnapsack {
         }
     }
 
+    /* 
+        Calcula cual es el valor de la celda T[i][j] cuando se encuentra en el primer objeto.
+        Recibe:
+            posición i (fila) de la tabla.
+            posición j (columna) de la tabla.
+    */
     abstract calculateValuesWhenFirstObject(i: number, j: number);
 
+    /* 
+        Calcula cual es el valor de la celda T[i][j] cuando no encuentra en el primer objeto.
+        Recibe:
+            posición i (fila) de la tabla.
+            posición j (columna) de la tabla.
+        Procedimiento:
+            en este caso calculará cuantos objetos del tipo de objeto se puede llevar según
+            la fórmula matemática 
+            T[i][j] = max(T[i][j - 1], 
+                        1 * v[j] + T[i - (1 * c[j])] [j - 1],
+                        2 * v[j] + T[i - (2 * c[j])] [j - 1]
+                        ...
+                        ...
+                        ...
+                        Q * v[j] + T[i - (Q * c[j])] [j - 1]
+                ) donde Q es la cantidad máxima disponible para un objeto.
+    */
     calculateValuesWhenNotFirstObject(i: number, j: number) {
         // getting possibles x
         var x = 1;
