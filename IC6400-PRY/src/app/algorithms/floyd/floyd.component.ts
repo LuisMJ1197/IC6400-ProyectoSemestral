@@ -29,9 +29,11 @@ export class FloydComponent implements OnInit {
 	currentDArray: string[][] = [];
 	currentPArray: Number[][] = [];
 	currentResultIndex:number;
-	selectedFirstNode: Node = null;
-	selectedSecondNode: Node = null;
-	
+	selectedFirstNode: number = null;
+	selectedSecondNode: number = null;
+	floydAlgorithm:Floyd = null;
+	path:String = "";
+
 	constructor() { 
 		this.adjacencyM.push([{value: "0"}] as Cell[]);
 		this.isExecuting = false;
@@ -98,10 +100,10 @@ export class FloydComponent implements OnInit {
 
 	executeAlgorithm() {
 		this.isExecuting = true;
-		let floydAlgorithm:Floyd = new Floyd(this.nodes.length, this.createD0MAtrix());
-		floydAlgorithm.execute();
-		this.DArrays = floydAlgorithm.DArrays;
-		this.PArrays = floydAlgorithm.PArrays;
+		this.floydAlgorithm = new Floyd(this.nodes.length, this.createD0MAtrix());
+		this.floydAlgorithm.execute();
+		this.DArrays = this.floydAlgorithm.DArrays;
+		this.PArrays = this.floydAlgorithm.PArrays;
 		this.currentDArray = this.setCurrentDArray(this.DArrays[this.currentResultIndex]);
 		this.DView = true;
 	}
@@ -220,5 +222,11 @@ export class FloydComponent implements OnInit {
 		this.PView = !this.PView;
 	}
 
+	getPath(){
+		if(this.floydAlgorithm != null && this.selectedFirstNode != null && this.selectedSecondNode != null){
+			this.path = this.floydAlgorithm.constructPath(Number(this.selectedFirstNode), Number(this.selectedSecondNode));
+			
+		}
+	}
 
 }

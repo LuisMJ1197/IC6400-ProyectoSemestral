@@ -64,7 +64,7 @@ export class Floyd {
             this.PArrays.push(this.copyMatrix(0, PMatrixCopy));
         }
         this.DArrays.pop();
-        this.PArrays.pop();
+        this.PMatrix = this.PArrays.pop();
     }
 
     constructPath(start:number, arrival:number){
@@ -74,7 +74,7 @@ export class Floyd {
         else{
             pathResult = (start + 1).toString() + " " + this.constructPathAux(start, arrival);
         }
-        return pathResult; 
+        return pathResult;
     }
 
     constructPathAux(start:number, arrival:number){
