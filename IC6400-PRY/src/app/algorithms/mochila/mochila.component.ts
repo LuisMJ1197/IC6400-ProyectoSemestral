@@ -23,7 +23,14 @@ export class MochilaComponent implements OnInit {
 	maxKnapsackSize: number = 20;
 	knapsackSize: number = 0;
 	maxItemCount: number = 10;
-	items: KObject[] = [] as KObject[];
+	items: KObject[] = [{ 
+		id: 0, 
+		cost: 0, 
+		value: 0, 
+		quantity: this.getQuantity(), 
+		selected: false,
+		count: 0
+	} as KObject] as KObject[];
 	matrix: number[][] = [];
 	matrixX: number[][] = [];
 	selectedFile: any;
