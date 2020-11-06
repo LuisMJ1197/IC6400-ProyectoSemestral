@@ -44,8 +44,8 @@
                 <p>Cantidad de objetos: </p>
                 <div class="spinner">
                     <div class="plusminus horiz">
-                        <button [disabled]="items.length == 0" (click)="removeItem()"></button>
-                        <input disabled type="number" name="productQty" value="0" min="0" max="maxItemCount"
+                        <button [disabled]="items.length == 1" (click)="removeItem()"></button>
+                        <input disabled type="number" name="productQty" value="1" min="1" max="maxItemCount"
                             [(ngModel)]="items.length">
                         <button [disabled]="items.length == maxItemCount" (click)="addItem()"></button>
                     </div>

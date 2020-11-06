@@ -1,1 +1,161 @@
-<app-notimplemented></app-notimplemented>
+<app-header-menu></app-header-menu>
+<div id="main">
+    <div id="algorithm-header">
+        <div class="first algorithm-comp">
+            <span class="algor-icon flaticon-delivery"></span>
+            <p>Rutas más cortas</p>
+        </div>
+        <div class="last algorithm-comp">
+            <div class="button load">
+                <span class="label">
+                    <i class="fas fa-upload"></i>Cargar archivo
+                </span>
+                <input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File"
+                    (change)="onFileSelect($event)">
+            </div>
+            <button id="save-button" type="button" class="button save" (click)="saveFile()">
+                <i class="fas fa-save"></i>Guardar archivo
+            </button>
+        </div>
+    </div>
+    <div id="algorithm-content">
+        <div class="a-content left">
+            <div class="config">
+                <p>Cantidad de nodos: </p>
+                <div class="spinner">
+                    <div class="plusminus horiz">
+                        <button [disabled]="nodes.length == 1" (click)="remove()"></button>
+                        <input disabled type="number" name="productQty" value="1" min="1" max="maxNodeCount"
+                            [(ngModel)]="nodes.length">
+                        <button [disabled]="nodes.length == maxNodeCount" (click)="add()"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="config node-list">
+                <div class="object-list">
+                    <p>Lista de objetos:</p>
+                    <button class="change-view" *ngIf="listView" (click)="listView = false">
+                        <i class="flaticon-delivery"></i>
+                    </button>
+                    <button class="change-view" *ngIf="!listView" (click)="listView = true">
+                        <i class="flaticon-list"></i>
+                    </button>
+                </div>
+                <div class="view" id="node-list" *ngIf="listView">
+                    <div class="node" *ngFor="let node of nodes ; let i = index">
+                        <p>Nodo <strong>#{{i}} &#x2192; </strong></p>
+                        <div class="node-config name">
+                            <p>Nombre:</p>
+                            <input placeholder="Nombre" name="name" [(ngModel)]="node.name"
+                                (change)="validateName(node)">
+                        </div>
+                    </div>
+                </div>
+                <div class="view" id="solution" *ngIf="!listView">
+                    <p>Consultar ruta óptima</p>
+                    <div class="node-selection first-node">
+                        <label for="first-nodes">De: </label>
+                        <select name="first-node" id="first-node" style="margin-left: 15px;" [(ngModel)]="selectedFirstNode">
+                            <option value="0" *ngFor="let node of nodes">{{node.name}}</option>
+                        </select>
+                    </div>
+                    <div class="node-selection last-node">
+                        <label for="last-nodes">Hacia: </label>
+                        <select name="last-node" id="last-node" style="margin-left: 15px;" [(ngModel)]="selectedSecondNode">
+                            <option value="0" *ngFor="let node of nodes">{{node.name}}</option>
+                        </select>
+                    </div>
+                    <button type="button" class="button exec">
+                        Consultar
+                    </button>
+                </div>
+            </div>
+            <div class="exec-button">
+                <button *ngIf="!isExecuting" type="button" class="button exec" (click)="executeAlgorithm()">
+                    Ejecutar algoritmo
+                </button>
+                <button *ngIf="isExecuting" type="button" class="button exec" (click)="reExecuteAlgorithm()">
+                    Ejecutar algoritmo
+                </button>
+            </div>
+        </div>
+        <div class="a-content right">
+            <table *ngIf="!isExecuting" style="width:100%">
+                <tr class="m-row header">
+                    <th class="m-head" style="padding-bottom: 10px; padding-bottom: 15px;">
+                        D(0)
+                    </th>
+                    <th class="m-head node" *ngFor="let node of nodes;">
+                        <p>{{node.name}}</p>
+                    </th>
+                </tr>
+                <tr class="m-row" *ngFor="let row of adjacencyM; let i = index;">
+                    <td class="m-col">{{nodes[i].name}}</td>
+                    <td class="m-col value" *ngFor="let col of row">
+                        <div class="matrix-value x-value">
+                            <div *ngIf=" i != row.indexOf(col) ; else diagonal">
+                                <input placeholder="" class="m-col value rowInput" [(ngModel)]="col.value" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                    name="distance" (change)="validateDistance(col)">
+                            </div>
+
+                            <ng-template #diagonal>
+                                <input placeholder="" class="m-col value rowInput" [(ngModel)]="col.value"
+                                    name="distance" (change)="validateDistance(col)" disabled>
+                            </ng-template>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table *ngIf="isExecuting && DView" style="width:100%">
+                <tr class="m-row header">
+                    <th class="m-head" style="padding-bottom: 10px; padding-bottom: 15px;">
+                        D({{currentResultIndex}})
+                    </th>
+                    <th class="m-head node" *ngFor="let node of nodes;">
+                        <p>{{node.name}}</p>
+                    </th>
+                </tr>
+                <tr class="m-row" *ngFor="let row of currentDArray; let i = index;">
+                    <td class="m-col">{{nodes[i].name}}</td>
+                    <td class="m-col value" *ngFor="let col of row">
+                        <div class="matrix-value x-value">
+                            <p class="m-col value">{{col}}</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table *ngIf="isExecuting && PView" style="width:100%">
+                <tr class="m-row header">
+                    <th class="m-head" style="padding-bottom: 10px; padding-bottom: 15px;">
+                        P({{currentResultIndex}})
+                    </th>
+                    <th class="m-head node" *ngFor="let node of nodes;">
+                        <p>{{node.name}}</p>
+                    </th>
+                </tr>
+                <tr class="m-row" *ngFor="let row of currentPArray; let i = index;">
+                    <td class="m-col">{{nodes[i].name}}</td>
+                    <td class="m-col value" *ngFor="let col of row">
+                        <div class="matrix-value x-value">
+                            <p class="m-col value">{{col}}</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="action-buttons">
+                <button type="button" class="button exec" (click)="previous()">
+                    Anterior
+                </button>
+                <button *ngIf="!PView" type="button" class="button exec" (click)="viewMatrixResult()">
+                    Ver P
+                </button>
+                <button *ngIf="!DView" type="button" class="button exec" (click)="viewMatrixResult()">
+                    Ver D
+                </button>
+                <button type="button" class="button exec" (click)="next()">
+                    Siguiente
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

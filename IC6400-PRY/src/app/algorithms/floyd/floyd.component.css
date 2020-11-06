@@ -1,0 +1,351 @@
+#main {
+    width: 100%;
+    height: calc(100vh - 45px);
+    position: relative;
+    overflow: hidden;
+}
+
+#algorithm-header {
+    position: relative;
+    width: 100%;
+    height: 6vh;
+    background-color: #cdcdcd;
+    display: flex;
+    text-align: center;
+    box-sizing: border-box;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#algorithm-header .algorithm-comp {
+    display: flex;
+    text-align: center;
+    box-sizing: border-box;
+    align-items: center;
+    flex-direction: row;
+    justify-content: left;
+    height: 100%;
+}
+
+#algorithm-header .first {
+    margin-left: 15px;
+}
+
+#algorithm-header .last {
+    margin-right: 15px;
+}
+  
+#algorithm-header .last .button , .exec-button .button {
+    height: 75%;
+    text-align: center;
+    vertical-align: middle;
+    border: 0px;
+    font-size: 0.9rem;
+    border-radius: 3px;
+    padding-right: 10px;
+    background-color: var(--very-light-grey);
+    -webkit-box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+    color: var(--dark-grey)
+}
+#algorithm-header,
+#algorithm-header .last,
+#algorithm-header .last .button {
+    position: relative;
+}
+
+#algorithm-header .last .button {
+    width: 175px;
+}
+
+#algorithm-header .last .button span.label {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    text-align: center;
+    height: 100%;
+    width: 175px;
+    background-color: var(--very-light-grey);
+    cursor: pointer;
+    font-size: 0.9rem !important;
+    border-radius: 3px;
+    padding: 5px 0;
+  }
+  
+  #algorithm-header .last .button span.label:hover {
+    background-color: var(--light-grey);
+    cursor: pointer;
+  }
+
+  #upload:hover {
+    background-color: var(--light-grey);
+  }
+
+  #upload {
+    display: inline-block;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 175px;
+    max-width: 175px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+#save-button { 
+    z-index: 2;
+}
+
+#algorithm-header .last .button:active, #algorithm-header .last .button:focus, .exec-button .button {
+    border: 0px;
+    outline: none;
+}
+
+#algorithm-header .last .button:hover {
+    background-color: var(--light-grey);
+}
+
+#algorithm-header .last .button.load {
+    margin-right: 15px;
+}
+
+#algorithm-header .last .button i {
+    font-size: medium;
+    margin-right: 5px;    
+    margin-left: 5px;    
+    color: var(--orange);
+}
+
+#algorithm-header .algorithm-comp span {
+    flex-shrink: 0;
+    font-size: 1.5rem !important;
+    font-weight: 300 !important;
+}
+
+#algorithm-header .algorithm-comp p {
+    margin-left: 5px;
+    position: relative;
+    flex: 0 1 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#algorithm-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: calc(100vh - 6vh - 45px);
+    padding: 15px;    
+}
+
+#algorithm-content .a-content {
+    height: 100%;
+    padding: 15px;
+    -webkit-box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    -moz-box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    font-size: 0.9rem;
+    position: relative;
+}
+
+#algorithm-content .left {
+    flex: 1;
+}
+
+#algorithm-content .right {
+    flex: 2;    
+    margin-left: 15px;
+}
+
+.exec-button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+}
+
+.exec-button .button.exec {
+    background-color: var(--orange);
+    color: white;
+    padding: 0;
+    padding: 15px;
+    padding-top: 5px;
+}
+
+.exec-button .button.exec:hover {
+    background-color: var(--light-grey);
+    color: var(--dark-grey);
+}
+
+.a-content.left > div {
+    height: 45px;
+    width: 100%;
+}
+
+.a-content.left .config {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.a-content.left .config p, .a-content.left .config .spinner {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.a-content.left .config.node-list {
+    display: block;
+}
+
+.a-content.left .config.node-list .object-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.a-content.left .config.node-list .object-list button {
+    background-color: var(--blue-grey);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    top: 0;
+    height: 30px;
+    width: 30px;
+}
+
+.a-content.left .config.node-list .object-list button:focus {
+    outline: none;
+}
+
+.a-content.left .config.node-list .view {
+    display: block;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.a-content.left .config.node-list .view#node-list .node {
+    height: 35px;
+    display: block;
+}
+
+.a-content.left .config.node-list .view#node-list .node > * {
+    display: inline-block;
+}
+
+.a-content.left .config.node-list .view#node-list .node .node-config > * {
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.a-content.left .config.node-list .view#node-list .node .node-config input {
+    width: 100px;
+}
+
+.a-content.right {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.a-content.right table .m-row {
+    width: 100%;
+    height: 25px;
+    display: inline-block;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.a-content.right table .m-row .m-head, .a-content.right table .m-row .m-col {
+    width: 30px;
+    height: 30px;
+    max-height: 30px;
+    padding: 0;
+    margin: 0;
+}
+
+
+.a-content.right table .m-row .m-col.value .matrix-value {
+    background-color: var(--light-grey);
+    padding: 0;
+    margin: 0;
+}
+
+.a-content.right table .m-row .m-head:first-child,
+.a-content.right table .m-row .m-col:first-child {
+    margin-right: 15px;
+}
+
+.a-content.right table .m-row .m-col.value {
+    padding:0px;
+    margin: 0px;
+}
+
+.rowInput{
+    border: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0px;
+}
+
+.action-buttons {
+    position: absolute;
+    bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - 30px);
+    justify-content: space-between;
+}
+
+.action-buttons button {
+    width: 150px;
+    height: 35px;
+    padding: 5px;
+    background-color: var(--orange);
+    border: none;
+    -webkit-box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    -moz-box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    border-radius: 3px;
+    color: white;
+}
+
+.action-buttons button:hover {
+    background-color: var(--blue-grey);
+    color: var(--light-black);
+}
+
+.action-buttons button:focus {
+    outline: none;
+}
+
+.a-content.left .node-selection {
+    height: 30px;
+    width: 100%;
+}
+
+.a-content.left .node-selection select {
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid var(--blue-grey);
+    width: 150px;
+}
+
+.a-content.left .node-selection select:hover {
+    cursor: pointer;
+}
+
+.a-content.left .node-selection select:focus {
+    outline: none;
+}
