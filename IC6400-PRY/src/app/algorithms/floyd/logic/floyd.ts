@@ -63,8 +63,9 @@ export class Floyd {
             this.DArrays.push(this.copyMatrix(this.infinite, DMatrix));
             this.PArrays.push(this.copyMatrix(0, PMatrixCopy));
         }
-        this.DArrays.pop();
+        // this.DArrays.pop(); # Changed Eliminated
         this.PMatrix = this.PArrays.pop();
+        this.PArrays.push(this.PMatrix); // Changed Added
     }
 
     constructPath(start:number, arrival:number){

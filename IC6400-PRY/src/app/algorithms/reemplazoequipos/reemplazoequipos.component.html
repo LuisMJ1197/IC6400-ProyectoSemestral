@@ -1,1 +1,142 @@
-<app-notimplemented></app-notimplemented>
+<app-header-menu></app-header-menu>
+<div id="main">
+    <div id="algorithm-header">
+        <div class="first algorithm-comp">
+            <span class="option-icon flaticon-exchange"></span>
+            <p>Reemplazo de Equipos</p>
+        </div>
+        <div class="last algorithm-comp">
+            <div class="button load">
+                <span class="label">
+                    <i class="fas fa-upload"></i>Cargar archivo
+                </span>
+                <input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File"
+                    (change)="onFileSelect($event)">
+            </div>
+            <button id="save-button" type="button" class="button save" (click)="saveFile()">
+                <i class="fas fa-save"></i>Guardar archivo
+            </button>
+        </div>
+    </div>
+    <div id="algorithm-content">
+        <div class="a-content left">
+            <div class="config initial-price">
+                <p>Costo inicial:</p>
+                <div class="spinner">
+                    <input placeholder="Costo inicial" name="initialCost" [(ngModel)]="initialCost"
+                        onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                        (change)="validateCost(initialCost)">
+                </div>
+            </div>
+            <div class="config">
+                <p>Plazo del proyecto: </p>
+                <div class="spinner">
+                    <div class="plusminus horiz">
+                        <button [disabled]="term == 1" (click)="removeTerm()"></button>
+                        <input type="number" name="productQty" value="1" min="1" max="maxTerm" [(ngModel)]="term"
+                            onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                            (change)="validateTerm(term)">
+                        <button [disabled]="term >= maxTerm" (click)="addTerm()"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="config">
+                <p>Vida útil del equipo: </p>
+                <div class="spinner">
+                    <div class="plusminus horiz">
+                        <button [disabled]="lifeSpan == 1" (click)="removeLifeSpan()"></button>
+                        <input type="number" name="productQty" value="1" min="1" max="maxLifeSpan"
+                            [(ngModel)]="lifeSpan" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                            (change)="validateLifeSpan(lifeSpan)">
+                        <button [disabled]="lifeSpan == maxLifeSpan" (click)="addLifeSpan()"></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="config year-list">
+                <div class="object-list">
+                    <p>Tabla de configuración:</p>
+                    <div class="config">
+                        <div class="spinner">
+                            <label class="checkbox-container">Añadir ganancias
+                                <input type="checkbox" [(ngModel)]="isGainActivated">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="view" id="lifespan-table" style="overflow: auto; max-height: 330px;">
+                    <table class="table" style="width:100%">
+                        <thead>
+                            <tr class="m-row header">
+                                <th class="m-head">Año</th>
+                                <th class="m-head">Reventa</th>
+                                <th class="m-head">Mantenimiento</th>
+                                <th class="m-head">Ganancia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="m-row" *ngFor="let span of lifeSpans ; let i = index">
+                                <th class="m-col">{{span.year}}</th>
+                                <td>
+                                    <input class="table-entry" placeholder="0" name="resale" [(ngModel)]="span.resale"
+                                        onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                </td>
+                                <td>
+                                    <input class="table-entry" placeholder="0" name="maintenance"
+                                        [(ngModel)]="span.maintenance"
+                                        onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                </td>
+                                <td>
+                                    <input [disabled]="!isGainActivated" class="table-entry" placeholder="0" name="gain"
+                                        [(ngModel)]="span.gain"
+                                        onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="exec-button">
+                <button type="button" class="button exec" (click)="executeAlgorithm()">
+                    Ejecutar algoritmo
+                </button>
+            </div>
+        </div>
+        <div class="a-content right">
+            <div class="cont result-table">
+                <p>Tabla de análisis:</p>
+                <table class="table" style="width:100%">
+                    <thead>
+                        <tr class="m-row header">
+                            <th class="m-head">t</th>
+                            <th class="m-head">G(t)</th>
+                            <th class="m-head">Próximo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="m-row" *ngFor="let sol of solutionMatrix ; let i = index">
+                            <td class="m-col">{{sol[0]}}</td>
+                            <td class="m-col">{{sol[1]}}</td>
+                            <td class="m-col">{{sol[2]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="cont solution-view">
+                <p>Planes:</p>
+                <div class="planes-div">
+                    <div *ngFor="let plan of plans; let i = index" class="plan-div">
+                        <p>Plan #{{i + 1}}</p>
+                        <div  class="plan-years">
+                            <div *ngFor="let year of plan; let j = index" class="plan-year">
+                                <i class="fas fa-arrow-right" *ngIf="j != 0"></i>
+                                <div class="circle">{{year}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

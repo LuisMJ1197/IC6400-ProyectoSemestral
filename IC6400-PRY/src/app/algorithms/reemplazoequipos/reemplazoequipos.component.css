@@ -1,0 +1,426 @@
+.plusminus {
+    margin-left: 0px;
+}
+#main {
+    width: 100%;
+    height: calc(100vh - 45px);
+    position: relative;
+    overflow: hidden;
+}
+
+#algorithm-header {
+    position: relative;
+    width: 100%;
+    height: 6vh;
+    background-color: #cdcdcd;
+    display: flex;
+    text-align: center;
+    box-sizing: border-box;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#algorithm-header .algorithm-comp {
+    display: flex;
+    text-align: center;
+    box-sizing: border-box;
+    align-items: center;
+    flex-direction: row;
+    justify-content: left;
+    height: 100%;
+}
+
+#algorithm-header .first {
+    margin-left: 15px;
+}
+
+#algorithm-header .last {
+    margin-right: 15px;
+}
+  
+#algorithm-header .last .button , .exec-button .button {
+    height: 75%;
+    text-align: center;
+    vertical-align: middle;
+    border: 0px;
+    font-size: 0.9rem;
+    border-radius: 3px;
+    padding-right: 10px;
+    background-color: var(--very-light-grey);
+    -webkit-box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+    color: var(--dark-grey)
+}
+#algorithm-header,
+#algorithm-header .last,
+#algorithm-header .last .button {
+    position: relative;
+}
+
+#algorithm-header .last .button {
+    width: 175px;
+}
+
+#algorithm-header .last .button span.label {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    text-align: center;
+    height: 100%;
+    width: 175px;
+    background-color: var(--very-light-grey);
+    cursor: pointer;
+    font-size: 0.9rem !important;
+    border-radius: 3px;
+    padding: 5px 0;
+  }
+  
+  #algorithm-header .last .button span.label:hover {
+    background-color: var(--light-grey);
+    cursor: pointer;
+  }
+
+  #upload:hover {
+    background-color: var(--light-grey);
+  }
+
+  #upload {
+    display: inline-block;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 175px;
+    max-width: 175px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+#save-button { 
+    z-index: 2;
+}
+
+#algorithm-header .last .button:active, #algorithm-header .last .button:focus, .exec-button .button {
+    border: 0px;
+    outline: none;
+}
+
+#algorithm-header .last .button:hover {
+    background-color: var(--light-grey);
+}
+
+#algorithm-header .last .button.load {
+    margin-right: 15px;
+}
+
+#algorithm-header .last .button i {
+    font-size: medium;
+    margin-right: 5px;    
+    margin-left: 5px;    
+    color: var(--orange);
+}
+
+#algorithm-header .algorithm-comp span {
+    flex-shrink: 0;
+    font-size: 1.5rem !important;
+    font-weight: 300 !important;
+}
+
+#algorithm-header .algorithm-comp p {
+    margin-left: 5px;
+    position: relative;
+    flex: 0 1 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#algorithm-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: calc(100vh - 6vh - 45px);
+    padding: 15px;    
+}
+
+#algorithm-content .a-content {
+    height: 100%;
+    padding: 15px;
+    -webkit-box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    -moz-box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    font-size: 0.9rem;
+    position: relative;
+}
+
+#algorithm-content .left {
+    flex: 1;
+}
+
+#algorithm-content .right {
+    flex: 2;    
+    margin-left: 15px;
+}
+
+.exec-button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+}
+
+.exec-button .button.exec {
+    background-color: var(--orange);
+    color: white;
+    padding: 0;
+    padding: 15px;
+    padding-top: 5px;
+}
+
+.exec-button .button.exec:hover {
+    background-color: var(--light-grey);
+    color: var(--dark-grey);
+}
+
+.a-content.left > div {
+    height: 45px;
+    width: 100%;
+}
+
+.a-content.left .config {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.a-content.left .config p {
+    flex: 40%;
+}
+
+.a-content.left .config .spinner, .a-content.left .config input{
+    flex: 60%;
+}
+
+.a-content.left .config p {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.a-content.left .config.initial-price input {
+    outline: none;
+    width: 100px;
+}
+
+/* Checkbox */
+/* Customize the label (the container) */
+.checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border: 1px var(--dark-grey);
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .checkbox-container input ~ .checkmark {
+    border: 1px solid var(--dark-grey);
+  }
+
+  .checkbox-container input:hover ~ .checkmark {
+    background-color: var(--orange);
+    border: 0px solid var(--dark-grey);
+}
+  
+  /* When the checkbox is checked, add a blue background */
+  .checkbox-container input:checked ~ .checkmark {
+    background-color: var(--orange);
+    border: 0px solid var(--dark-grey);
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .checkbox-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);    
+  }
+
+  .config.year-list .lifespan-table table .m-row {
+    width: 100%;
+    height: 25px;
+    display: inline-block;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.config.year-list .lifespan-table table .m-row .m-head, .config.year-list .lifespan-table table .m-row .m-col {
+    width: 75px;
+    height: 25px;
+    max-height: 25px;
+    padding: 0;
+    margin: 0;
+}
+
+.a-content.left .config.year-list {
+    display: block;
+}
+
+.a-content.left .config.year-list .object-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.a-content.left .config.year-list .view {
+    display: block;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+input.table-entry {
+    width: 100%;
+    height: 100% + 15px;
+    outline: none;
+    border: 1px solid var(--very-light-grey);
+    background-color: var(--very-light-grey);
+}
+
+input.table-entry::before {
+    outline: none;
+}
+
+input[disabled] {
+    color: #b1b1b1;
+}
+
+#lifespan-table table tbody tr td, #lifespan-table table tbody tr th {
+    padding: 0px;
+    padding-left: 12px;
+}
+
+.a-content.right .result-table {
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.a-content.right .result-table table thead tr th, .a-content.right .result-table table tbody tr td {
+    text-align: center;
+}
+
+.a-content.right .result-table table tbody tr td, .a-content.right .result-table table tbody tr th {
+    padding: 2px;
+    padding-left: 12px;
+}
+
+.a-content.right {
+    display: flex;
+    justify-content: left;
+}
+
+.a-content.right .result-table {
+    width: 35%;
+}
+
+.a-content.right .solution-view {
+    position: relative;
+    padding-left: 2rem;
+    width: 65%;
+}
+
+/* Circle */
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--dark-grey);
+    color: var(--dark-grey);
+    line-height:25px;
+    text-align:center;
+    font-size: 0.9rem;
+}
+
+.plan-years {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.plan-div ~ .plan-div {
+    margin-top: 1rem;
+    
+}
+
+.planes-div {
+    position: relative;
+    max-height: 90%;
+    overflow: auto;
+    margin-left: 1rem;
+}
+
+.plan-year {
+    display: flex;
+    flex-direction: row;
+}
+
+.plan-year i {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 1rem;
+    color: var(--blue-grey)
+}
+
+.plan-year ~ .plan-year {
+    margin-left: 1rem;
+}

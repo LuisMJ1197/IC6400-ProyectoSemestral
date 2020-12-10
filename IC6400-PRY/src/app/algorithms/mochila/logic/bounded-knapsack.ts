@@ -7,10 +7,12 @@ export class BoundedKnapsack extends GeneralKnapsack {
     
     calculateValuesWhenFirstObject(i: number, j: number) {
         var x = 1;
-        while ((i - (x * Number(this.items[j].value))) >= 0 && x <= this.items[j].quantity) {
-            x += 1;	
+        while ((i - (x * Number(this.items[j].cost))) >= 0 && x <= this.items[j].quantity) {
+            x += 1;
         }
+        x = x - 1 // Changed Added
         this.X[i][j] = x;
-        this.T[i][j] = this.items[j].value * x;
+        this.T[i][j] = Number(this.items[j].value) * x;
+        console.log(this.T[i][j]);
     }
 }
