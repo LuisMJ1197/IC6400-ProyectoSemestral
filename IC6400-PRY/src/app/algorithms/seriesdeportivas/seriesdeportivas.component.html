@@ -1,1 +1,115 @@
-<app-notimplemented></app-notimplemented>
+<app-header-menu></app-header-menu>
+<div id="main">
+    <div id="algorithm-header">
+        <div class="first algorithm-comp">
+            <span class="option-icon flaticon-basketball"></span>
+            <p>Series deportivas</p>
+        </div>
+        <div class="last algorithm-comp">
+            <div class="button load">
+                <span class="label">
+                    <i class="fas fa-upload"></i>Cargar archivo
+                </span>
+                <input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File"
+                    (change)="onFileSelect($event)">
+            </div>
+            <button id="save-button" type="button" class="button save" (click)="saveFile()">
+                <i class="fas fa-save"></i>Guardar archivo
+            </button>
+        </div>
+    </div>
+    <div id="algorithm-content">
+        <div class="a-content left">
+            <div class="config initial-price">
+                <p>n:</p>
+                <div class="spinner">
+                    <div class="plusminus horiz">
+                        <button [disabled]="maxNumberOfGames == 1" (click)="removeMaxGames()"></button>
+                        <input type="number" name="maxGames" value="1" min="1" max="maxNGames"
+                            [(ngModel)]="maxNumberOfGames">
+                        <button [disabled]="maxNumberOfGames >= maxNGames" (click)="addMaxGames()"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="config-p">
+                <div class="config">
+                    <p>p<sub>h</sub>:</p>
+                    <div class="spinner">
+                        <input class="ph" placeholder="% A de ganar en casa" name="ph" [(ngModel)]="ph"
+                            onkeypress='return event.charCode >= 48 && event.charCode <= 57' (change)="validatePh(ph)">
+                        %
+                    </div>
+                </div>
+                <div class="config">
+                    <p>p<sub>r</sub>:</p>
+                    <div class="spinner">
+                        <input class="pr" placeholder="% A de ganar de visita" name="pr" [(ngModel)]="pr"
+                            onkeypress='return event.charCode >= 48 && event.charCode <= 57' (change)="validatePr(pr)">
+                        %
+                    </div>
+                </div>
+            </div>
+            <div class="config-p">
+                <div class="config">
+                    <p>q<sub>h</sub>:</p>
+                    <div class="spinner">
+                        <input class="ph" name="qh" [(ngModel)]="qh"
+                            disabled onkeypress='return event.charCode >= 48 && event.charCode <= 57' (change)="validatePh(qh)">
+                        %
+                    </div>
+                </div>
+                <div class="config">
+                    <p>q<sub>r</sub>:</p>
+                    <div class="spinner">
+                        <input class="ph" name="qr" [(ngModel)]="qr"
+                        disabled onkeypress='return event.charCode >= 48 && event.charCode <= 57' (change)="validatePr(qr)">
+                        %
+                    </div>
+                </div>
+            </div>
+            <div class="config-g game-format">
+                <div class="game-format-title">
+                    <p>Configuración del formato de juego:</p>
+                </div>
+                <div class="view" id="game-format-config" style="overflow: auto; max-height: 330px;">
+                    <div class="game" *ngFor="let game of games; let i = index">
+                        <p>Juego <strong>#{{i + 1}} &#x2192; </strong></p>
+                        <div class="game-config">
+                            <div class="center">
+                                <input type="checkbox" [(ngModel)]="game.home"/>
+                            </div>  {{game.home? 'Casa' : 'Visita'}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="exec-button">
+                <button type="button" class="button exec" (click)="executeAlgorithm()">
+                    Ejecutar algoritmo
+                </button>
+            </div>
+        </div>
+        <div class="a-content right">
+
+            <div class="team-a">
+                <p>Equipo A</p>
+                <div class="solution-matrix">
+                    <p class="label-a" style="margin-bottom: 1rem;">Equipo B</p>
+                    <table class="table table-bordered" style="width:100%">
+                        <thead>
+                            <tr class="m-row header">
+                                <td class="label-b empty"></td>
+                                <th class="m-head" *ngFor="let row of solutionMatrix; let i = index;">{{i}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="m-row" *ngFor="let row of solutionMatrix ; let i = index">
+                                <td class="m-col-head">{{i}}</td>
+                                <td class="m-col" *ngFor="let col of row">{{col}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

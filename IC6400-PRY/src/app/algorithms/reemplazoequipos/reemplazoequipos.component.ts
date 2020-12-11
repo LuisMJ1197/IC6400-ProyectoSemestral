@@ -30,24 +30,10 @@ export class ReemplazoequiposComponent implements OnInit {
 	isGainActivated: boolean = false;
 	selectedFile: any;
 	solutionMatrix: number[][] = [
-		[0, 0, 0]
+		[0, 0, 0],
+		[1, 0, 0]
 	];
-	plans: number[][] = [
-		[0,0,0],
-		[0,0,0],
-		[0,0,0],
-		[0,0,0],
-		[0,0,0],
-		[0,0,0],
-		[0,0,0],
-		[0,0,0],
-		[0,0,0],
-		[0,0,0],
-		[0,0,0],
-		[0,0,0],
-		[0,0,0]
-
-	];
+	plans: number[][] = [];
 
 	constructor() {}
 
@@ -106,7 +92,7 @@ export class ReemplazoequiposComponent implements OnInit {
 
 	addTerm() {
 		this.term += 1;
-		this.solutionMatrix.push([this.term, 0, 0]);
+		this.solutionMatrix.push([this.term - 1, 0, 0]);
 	}
 
 	removeTerm() {
@@ -122,17 +108,30 @@ export class ReemplazoequiposComponent implements OnInit {
 
 	validateTerm(term) {
 		if (!(Number(term) <= this.maxTerm)) {
-			this.term = 30;
-		} else if (term == "") {
+			this.term = this.maxTerm;
+		} else if (term == "" || term == 0) {
 			this.term = 1;
+		}
+		this.solutionMatrix = [] 
+		for(let i = 0; i < this.term + 1; i++) {
+			this.solutionMatrix.push([i, 0, 0]);
 		}
 	}
 
 	validateLifeSpan(lifeSpan) {
 		if (!(Number(lifeSpan) <= this.maxLifeSpan)) {
-			this.lifeSpan = 30;
-		} else if (lifeSpan == "") {
+			this.lifeSpan = this.maxLifeSpan;
+		} else if (lifeSpan == "" || lifeSpan == 0) {
 			this.lifeSpan = 1;
+		}
+		this.lifeSpans = [];
+		for (let i = 0; i < this.lifeSpan; i++) {
+			this.lifeSpans.push({
+				year: i+1,
+				resale: 0,
+				maintenance: 0,
+				gain: 0
+			});
 		}
 	}
 
