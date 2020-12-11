@@ -51,18 +51,18 @@
             </div>
             <div class="config-p">
                 <div class="config">
-                    <p>q<sub>h</sub>:</p>
-                    <div class="spinner">
-                        <input class="ph" name="qh" [(ngModel)]="qh"
-                            disabled onkeypress='return event.charCode >= 48 && event.charCode <= 57' (change)="validatePh(qh)">
-                        %
-                    </div>
-                </div>
-                <div class="config">
                     <p>q<sub>r</sub>:</p>
                     <div class="spinner">
                         <input class="ph" name="qr" [(ngModel)]="qr"
                         disabled onkeypress='return event.charCode >= 48 && event.charCode <= 57' (change)="validatePr(qr)">
+                        %
+                    </div>
+                </div>
+                <div class="config">
+                    <p>q<sub>h</sub>:</p>
+                    <div class="spinner">
+                        <input class="ph" name="qh" [(ngModel)]="qh"
+                            disabled onkeypress='return event.charCode >= 48 && event.charCode <= 57' (change)="validatePh(qh)">
                         %
                     </div>
                 </div>
@@ -104,7 +104,8 @@
                         <tbody>
                             <tr class="m-row" *ngFor="let row of solutionMatrix ; let i = index">
                                 <td class="m-col-head">{{i}}</td>
-                                <td class="m-col" *ngFor="let col of row">{{col}}</td>
+                                <td class="m-col" *ngFor="let col of row; let j = index;" 
+                                    [ngClass]="i == solutionMatrix.length - 1 && j == i && col != ''? 'last-cell' : ''">{{col}}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -374,3 +374,8 @@
     text-align: center;
     width: 100%;
 }
+
+.last-cell {
+    background-color: teal;
+    color: white;
+}

@@ -1,4 +1,6 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { SeriesDeportivas } from './logic/series-deportivas';
 
 export type Game = {
   home: boolean;
@@ -42,17 +44,25 @@ export class SeriesdeportivasComponent implements OnInit {
 	}
 
 	loadFile(file) {
-		
+    this.maxNumberOfGames = file.maxNumberOfGames;
+    this.ph = file.ph;
+    this.pr = file.pr;
+    this.qh = this.getQ(this.pr);
+    this.qr = this.getQ(this.ph);
+    this.games = file.format;
 	}
 
 	saveFile() {
 		var element = document.createElement('a');
 		element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(
 			JSON.stringify({
-				// 
+				maxNumberOfGames: this.maxNumberOfGames,
+        ph: this.ph,
+        pr: this.pr,
+        format: this.games
 			})
 		));
-		element.setAttribute('download', "reemplazodata.json");
+		element.setAttribute('download', "seriesdeportivasdata.json");
 
 		element.style.display = 'none';
 		document.body.appendChild(element);
@@ -106,6 +116,6 @@ export class SeriesdeportivasComponent implements OnInit {
   }
 
   executeAlgorithm() {
-
+    this.solutionMatrix = new SeriesDeportivas(this.maxNumberOfGames, Number(this.ph), Number(this.pr), this.games).execute();
   }
 }
