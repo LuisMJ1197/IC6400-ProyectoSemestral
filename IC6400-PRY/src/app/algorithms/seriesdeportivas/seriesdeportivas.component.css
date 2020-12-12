@@ -336,6 +336,9 @@
     display: flex;
     flex-direction: row;
     width: auto;
+    max-width: 100%;
+    overflow: auto;
+    max-height: 100%;
 }
 
 .a-content.right .team-a p {
@@ -347,6 +350,7 @@
 
 .a-content.right .team-a .solution-matrix {
     margin-left: 1rem;
+    
 }
 
 .a-content.right .team-a .solution-matrix table > * {

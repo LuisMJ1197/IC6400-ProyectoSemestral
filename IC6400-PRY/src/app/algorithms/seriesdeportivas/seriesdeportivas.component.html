@@ -25,9 +25,9 @@
                 <div class="spinner">
                     <div class="plusminus horiz">
                         <button [disabled]="maxNumberOfGames == 1" (click)="removeMaxGames()"></button>
-                        <input type="number" name="maxGames" value="1" min="1" max="maxNGames"
-                            [(ngModel)]="maxNumberOfGames">
-                        <button [disabled]="maxNumberOfGames >= maxNGames" (click)="addMaxGames()"></button>
+                        <input type="number" name="maxGames" value="1" min="1" max="0"
+                            [(ngModel)]="maxNumberOfGames" (change)="validateGames(maxNumberOfGames)">
+                        <button (click)="addMaxGames()"></button>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                     <p>p<sub>h</sub>:</p>
                     <div class="spinner">
                         <input class="ph" placeholder="% A de ganar en casa" name="ph" [(ngModel)]="ph"
-                            onkeypress='return event.charCode >= 48 && event.charCode <= 57' (change)="validatePh(ph)">
+                            onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46' (change)="validatePh(ph)">
                         %
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     <p>p<sub>r</sub>:</p>
                     <div class="spinner">
                         <input class="pr" placeholder="% A de ganar de visita" name="pr" [(ngModel)]="pr"
-                            onkeypress='return event.charCode >= 48 && event.charCode <= 57' (change)="validatePr(pr)">
+                            onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46' (change)="validatePr(pr)">
                         %
                     </div>
                 </div>
