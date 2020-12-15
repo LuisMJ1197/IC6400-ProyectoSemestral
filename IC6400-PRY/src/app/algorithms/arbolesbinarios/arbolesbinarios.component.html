@@ -1,1 +1,143 @@
-<app-notimplemented></app-notimplemented>
+<app-header-menu></app-header-menu>
+<div id="main">
+    <div id="algorithm-header">
+        <div class="first algorithm-comp">
+            <span class="option-icon flaticon-hierarchical-structure"></span>
+            <p>Árboles binarios</p>
+        </div>
+        <div class="last algorithm-comp">
+            <div class="button load">
+                <span class="label">
+                    <i class="fas fa-upload"></i>Cargar archivo
+                </span>
+                <input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File"
+                    (change)="onFileSelect($event)">
+            </div>
+            <button id="save-button" type="button" class="button save" (click)="saveFile()">
+                <i class="fas fa-save"></i>Guardar archivo
+            </button>
+        </div>
+    </div>
+    <div id="algorithm-content">
+        <div class="a-content left">
+            <div class="config">
+                <p>Número de llaves: </p>
+                <div class="spinner">
+                    <div class="plusminus horiz">
+                        <button [disabled]="keyQ == 0" (click)="removeKey()"></button>
+                        <input disabled type="number" name="keyQ" value="0" min="0" max="maxKeyQ" [(ngModel)]="keyQ">
+                        <button [disabled]="keyQ == maxKeyQ" (click)="addKey()"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="config key-list">
+                <div class="object-list">
+                    <p *ngIf="!orderView">Lista de llaves:</p>
+                    <p *ngIf="orderView">Lista de llaves ordenadas:</p>
+                    <button class="change-view" *ngIf="!orderView" (click)="orderView = true">
+                        <i class="fas fa-sort-alpha-down"></i>
+                    </button>
+                    <button class="change-view" *ngIf="orderView" (click)="orderView = false">
+                        <i class="flaticon-list"></i>
+                    </button>
+                </div>
+                <div class="view" id="key-list" *ngIf="!orderView">
+                    <div class="key" *ngFor="let key of keys; let i = index">
+                        <p>Llave <strong>#{{i + 1}} &#x2192; </strong></p>
+                        <div class="key-config code">
+                            <p>Código:</p>
+                            <input placeholder="Código" name="C" [(ngModel)]="key.code">
+                        </div>
+                        <div class="key-config height">
+                            <p>Peso:</p>
+                            <input placeholder="Peso" name="V" [(ngModel)]="key.height"
+                                onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46'>
+                        </div>
+                    </div>
+                </div>
+                <div class="view" id="ordered-key-list" *ngIf="orderView">
+                    <p>Llaves ordenadas:</p>
+                    <div class="table-div">
+                        <table class="table" style="width:100%">
+                            <thead>
+                                <tr class="m-row header">
+                                    <th class="m-head">Llave</th>
+                                    <th class="m-head">Probabilidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="m-row" *ngFor="let key of orderedKeys">
+                                    <td class="m-col">{{key.code}}</td>
+                                    <td class="m-col">{{key.prob}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="exec-button">
+                <button type="button" class="button exec" (click)="executeAlgorithm()">
+                    Ejecutar algoritmo
+                </button>
+            </div>
+        </div>
+        <div class="a-content right">
+            <div class="cont solution-view" [ngClass]="treeView ? 'non-display' : ''">
+                <div class="ar-table-div" *ngIf="tableAView">
+                    <p>Tabla A:</p>
+                    <table class="table table-bordered" style="width:100%">
+                        <thead>
+                            <tr class="m-row header">
+                                <td class="label-b empty"></td>
+                                <th class="m-head" *ngFor="let row of A; let i = index;">{{i}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="m-row" *ngFor="let row of A ; let i = index">
+                                <th class="m-col-head">{{i + 1}}</th>
+                                <td class="m-col" *ngFor="let col of row">{{col}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ar-table-div" *ngIf="!tableAView">
+                    <p>Tabla R:</p>
+                    <table class="table table-bordered" style="width:100%">
+                        <thead>
+                            <tr class="m-row header">
+                                <td class="label-b empty"></td>
+                                <th class="m-head" *ngFor="let row of R; let i = index;">{{i}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="m-row" *ngFor="let row of R ; let i = index">
+                                <th class="m-col-head">{{i + 1}}</th>
+                                <td class="m-col" *ngFor="let col of row">{{col}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="binary-tree" [ngClass]="!treeView ? 'non-display' : ''">
+                <p>Árbol binario de búsqueda óptimo: </p>
+                <div class="tree" id="binarytree">
+                </div>
+            </div>
+            <div class="exec-button">
+                <div class="table-view" *ngIf="!treeView">
+                    <button type="button" class="button exec" (click)="tableAView = !tableAView">
+                        {{tableAView ? 'Ver tabla R' : 'Ver tabla A'}}
+                    </button>
+                    <button type="button" class="button exec" (click)="treeView = !treeView">
+                        Ver árbol
+                    </button>
+                </div>
+                <div class="tree-view" *ngIf="treeView">
+                    <button type="button" class="button exec" (click)="treeView = !treeView">
+                        Ver tablas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

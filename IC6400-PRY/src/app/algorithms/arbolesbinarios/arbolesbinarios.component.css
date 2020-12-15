@@ -1,0 +1,485 @@
+#main {
+    width: 100%;
+    height: calc(100vh - 45px);
+    position: relative;
+    overflow: hidden;
+}
+
+#algorithm-header {
+    position: relative;
+    width: 100%;
+    height: 6vh;
+    background-color: #cdcdcd;
+    display: flex;
+    text-align: center;
+    box-sizing: border-box;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#algorithm-header .algorithm-comp {
+    display: flex;
+    text-align: center;
+    box-sizing: border-box;
+    align-items: center;
+    flex-direction: row;
+    justify-content: left;
+    height: 100%;
+}
+
+#algorithm-header .first {
+    margin-left: 15px;
+}
+
+#algorithm-header .last {
+    margin-right: 15px;
+}
+  
+#algorithm-header .last .button , .exec-button .button {
+    height: 75%;
+    text-align: center;
+    vertical-align: middle;
+    border: 0px;
+    font-size: 0.9rem;
+    border-radius: 3px;
+    padding-right: 10px;
+    background-color: var(--very-light-grey);
+    -webkit-box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+    color: var(--dark-grey)
+}
+#algorithm-header,
+#algorithm-header .last,
+#algorithm-header .last .button {
+    position: relative;
+}
+
+#algorithm-header .last .button {
+    width: 175px;
+}
+
+#algorithm-header .last .button span.label {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    text-align: center;
+    height: 100%;
+    width: 175px;
+    background-color: var(--very-light-grey);
+    cursor: pointer;
+    font-size: 0.9rem !important;
+    border-radius: 3px;
+    padding: 5px 0;
+  }
+  
+  #algorithm-header .last .button span.label:hover {
+    background-color: var(--light-grey);
+    cursor: pointer;
+  }
+
+  #upload:hover {
+    background-color: var(--light-grey);
+  }
+
+  #upload {
+    display: inline-block;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 175px;
+    max-width: 175px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+#save-button { 
+    z-index: 2;
+}
+
+#algorithm-header .last .button:active, #algorithm-header .last .button:focus, .exec-button .button {
+    border: 0px;
+    outline: none;
+}
+
+#algorithm-header .last .button:hover {
+    background-color: var(--light-grey);
+}
+
+#algorithm-header .last .button.load {
+    margin-right: 15px;
+}
+
+#algorithm-header .last .button i {
+    font-size: medium;
+    margin-right: 5px;    
+    margin-left: 5px;    
+    color: var(--orange);
+}
+
+#algorithm-header .algorithm-comp span {
+    flex-shrink: 0;
+    font-size: 1.5rem !important;
+    font-weight: 300 !important;
+}
+
+#algorithm-header .algorithm-comp p {
+    margin-left: 5px;
+    position: relative;
+    flex: 0 1 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#algorithm-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: calc(100vh - 6vh - 45px);
+    padding: 15px;    
+}
+
+#algorithm-content .a-content {
+    height: 100%;
+    padding: 15px;
+    -webkit-box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    -moz-box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    font-size: 0.9rem;
+    position: relative;
+}
+
+#algorithm-content .left {
+    flex: 1;
+}
+
+#algorithm-content .right {
+    flex: 2;    
+    margin-left: 15px;
+}
+
+.exec-button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+}
+
+.exec-button .button.exec {
+    background-color: var(--orange);
+    color: white;
+    padding: 0;
+    padding: 15px;
+    padding-top: 5px;
+}
+
+.exec-button .button.exec:hover {
+    background-color: var(--light-grey);
+    color: var(--dark-grey);
+}
+
+.a-content.left > div {
+    height: 45px;
+    width: 100%;
+}
+
+.a-content.left .config {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.a-content.left .config p, .a-content.left .config .spinner {
+    flex: 40%;
+}
+
+.a-content.left .config .spinner {
+    flex: 60%;
+}
+
+.a-content.left .config p {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.a-content.right {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.a-content.left .config.key-list {
+    display: block;
+}
+
+.a-content.left .config.key-list .object-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.a-content.left .config.key-list .object-list button {
+    background-color: var(--blue-grey);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    top: 0;
+    height: 30px;
+    width: 30px;
+}
+
+.a-content.left .config.key-list .object-list button:focus {
+    outline: none;
+}
+
+.a-content.left .config.key-list .view {
+    display: block;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.a-content.left .config.key-list .view#key-list .key {
+    height: 35px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.a-content.left .config.key-list .view#key-list .key {
+    margin-bottom: 0.5rem;
+}
+
+.a-content.left .config.key-list .view#key-list .key > * {
+    display: inline-block;
+}
+
+.a-content.left .config.key-list .view#key-list .key p {
+    flex: 26%;
+}
+
+.a-content.left .config.key-list .view#key-list .key .key-config {
+    flex: 37%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.a-content.left .config.key-list .view#key-list .key .key-config input {
+    width: 100px;
+}
+
+.a-content.left .config.key-list .view#key-list .key .key-config.height {
+    margin-left: 10px;
+}
+
+.a-content.left .config.key-list .view#ordered-key-list {
+    height: 100%;
+}
+
+.a-content.left .config.key-list .view#ordered-key-list table th, 
+.a-content.left .config.key-list .view#ordered-key-list table td {
+    height: 25px;
+    max-height: 25px;
+    padding: 0.4rem;
+}
+
+.a-content.right {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+.a-content.right .solution-view {
+    position: relative;
+    overflow: auto;
+}
+
+.a-content.right .ar-table-div p {
+    margin: 0;
+}
+
+.a-content.right .ar-table-div table th, .a-content.right .ar-table-div table td {
+    text-align: center;
+    padding: 0.5rem;
+    height: 40px;
+    width: 70px;
+    max-width: 40px;
+    min-width: 40px;
+    max-height: 40px;
+    max-width: 70px;
+}
+
+.a-content.right .team-a .solution-view .ar-table-view table > * {
+    text-align: center;
+}
+
+.table-bordered, .table-bordered td, .table-bordered th {
+    border: 1px solid var(--blue-grey);
+}
+
+.table-bordered, .table-bordered td.empty {
+    border: none;
+}
+
+.a-content.right .team-a .solution-view .ar-table-view .m-head, 
+.a-content.right .team-a .solution-view .ar-table-view .m-col-head {
+    background-color: var(--blue-grey);
+}
+
+.a-content.right .team-a .solution-view .ar-table-view table p {
+    text-align: center;
+}
+
+.a-content.right .exec-button {
+    height: 50px;
+}
+
+.a-content.right .exec-button .table-view {
+    width: 100%;
+}
+
+.a-content.right .exec-button .table-view {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.a-content.right .exec-button .button.exec {
+    padding: 0.5rem;
+    height: fit-content;
+}
+
+/*
+
+Binary Tree CSS
+From: Binary Tree MLM Html
+By: Avaneesh Kumar
+At: https://codepen.io/Avaneesh/pen/QWwNrBX
+*/
+/*Now the CSS*/
+
+.binary-tree > * {
+    margin: 0; padding: 0;
+}
+
+.tree ul {
+    padding-top: 20px; 
+    position: relative;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+.tree li {
+	float: left; text-align: center;
+	list-style-type: none;
+	position: relative;
+	padding: 20px 5px 0 5px;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+/*We will use ::before and ::after to draw the connectors*/
+
+
+
+.tree li::before, .tree li::after{
+	content: '';
+    position: absolute; 
+    top: 0; 
+    right: 50%;
+	border-top: 1px solid var(--blue-grey);
+    width: 50%; 
+    height: 20px;
+}
+
+.tree li::after{
+	right: auto; left: 50%;
+	border-left: 1px solid var(--blue-grey);
+}
+
+/*We need to remove left-right connectors from elements without 
+any siblings*/
+.tree li:only-child::after, .tree li:only-child::before {
+	display: none;
+}
+
+/*Remove space from the top of single children*/
+.tree li:only-child{ 
+    padding-top: 0;
+}
+
+/*Remove left connector from first child and 
+right connector from last child*/
+.tree li:first-child::before, .tree li:last-child::after{
+	border: 0 none;
+}
+
+/*Adding back the vertical connector to the last nodes*/
+.tree li:last-child::before{
+	border-right: 1px solid var(--blue-grey);
+	border-radius: 0 5px 0 0;
+	-webkit-border-radius: 0 5px 0 0;
+	-moz-border-radius: 0 5px 0 0;
+}
+
+.tree li:first-child::after{
+	border-radius: 5px 0 0 0;
+	-webkit-border-radius: 5px 0 0 0;
+	-moz-border-radius: 5px 0 0 0;
+}
+
+/*Time to add downward connectors from parents*/
+.tree ul ul::before{
+	content: '';
+	position: absolute; top: 0; left: 50%;
+	border-left: 1px solid var(--blue-grey);
+	width: 0; height: 20px;
+}
+
+.tree li a{
+	border: 1px solid var(--blue-grey);
+	padding: 5px 10px;
+	text-decoration: none;
+	color: #666;
+	font-family: arial, verdana, tahoma;
+	font-size: 1rem;
+	display: inline-block;
+	border-radius: 100px;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+/*Time for some hover effects*/
+/*We will apply the hover effect the the lineage of the element also*/
+.tree li a:hover, .tree li a:hover+ul li a {
+    background: var(--orange); 
+    color: white; 
+    border: 1px solid var(--orange); 
+}
+
+/*Connector styles on hover*/
+.tree li a:hover+ul li::after, 
+.tree li a:hover+ul li::before, 
+.tree li a:hover+ul::before, 
+.tree li a:hover+ul ul::before{
+	border-color:  var(--blue-grey); 
+}
+
+.non-display {
+    display: none;
+}
