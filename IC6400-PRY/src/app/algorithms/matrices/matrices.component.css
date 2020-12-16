@@ -1,0 +1,378 @@
+#main {
+    width: 100%;
+    height: calc(100vh - 45px);
+    position: relative;
+    overflow: hidden;
+}
+
+#algorithm-header {
+    position: relative;
+    width: 100%;
+    height: 6vh;
+    background-color: #cdcdcd;
+    display: flex;
+    text-align: center;
+    box-sizing: border-box;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#algorithm-header .algorithm-comp {
+    display: flex;
+    text-align: center;
+    box-sizing: border-box;
+    align-items: center;
+    flex-direction: row;
+    justify-content: left;
+    height: 100%;
+}
+
+#algorithm-header .first {
+    margin-left: 15px;
+}
+
+#algorithm-header .last {
+    margin-right: 15px;
+}
+  
+#algorithm-header .last .button , .exec-button .button {
+    height: 75%;
+    text-align: center;
+    vertical-align: middle;
+    border: 0px;
+    font-size: 0.9rem;
+    border-radius: 3px;
+    padding-right: 10px;
+    background-color: var(--very-light-grey);
+    -webkit-box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+    color: var(--dark-grey)
+}
+#algorithm-header,
+#algorithm-header .last,
+#algorithm-header .last .button {
+    position: relative;
+}
+
+#algorithm-header .last .button {
+    width: 175px;
+}
+
+#algorithm-header .last .button span.label {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    text-align: center;
+    height: 100%;
+    width: 175px;
+    background-color: var(--very-light-grey);
+    cursor: pointer;
+    font-size: 0.9rem !important;
+    border-radius: 3px;
+    padding: 5px 0;
+  }
+  
+  #algorithm-header .last .button span.label:hover {
+    background-color: var(--light-grey);
+    cursor: pointer;
+  }
+
+  #upload:hover {
+    background-color: var(--light-grey);
+  }
+
+  #upload {
+    display: inline-block;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 175px;
+    max-width: 175px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+#save-button { 
+    z-index: 2;
+}
+
+#algorithm-header .last .button:active, #algorithm-header .last .button:focus, .exec-button .button {
+    border: 0px;
+    outline: none;
+}
+
+#algorithm-header .last .button:hover {
+    background-color: var(--light-grey);
+}
+
+#algorithm-header .last .button.load {
+    margin-right: 15px;
+}
+
+#algorithm-header .last .button i {
+    font-size: medium;
+    margin-right: 5px;    
+    margin-left: 5px;    
+    color: var(--orange);
+}
+
+#algorithm-header .algorithm-comp span {
+    flex-shrink: 0;
+    font-size: 1.5rem !important;
+    font-weight: 300 !important;
+}
+
+#algorithm-header .algorithm-comp p {
+    margin-left: 5px;
+    position: relative;
+    flex: 0 1 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#algorithm-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: calc(100vh - 6vh - 45px);
+    padding: 15px;    
+}
+
+#algorithm-content .a-content {
+    height: 100%;
+    padding: 15px;
+    -webkit-box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    -moz-box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    box-shadow: 0px 2px 5px -1px rgba(126, 151, 157, 1);
+    font-size: 0.9rem;
+    position: relative;
+}
+
+#algorithm-content .left {
+    flex: 1;
+}
+
+#algorithm-content .right {
+    flex: 2;    
+    margin-left: 15px;
+}
+
+.exec-button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+}
+
+.exec-button .button.exec {
+    background-color: var(--orange);
+    color: white;
+    padding: 0;
+    padding: 15px;
+    padding-top: 5px;
+}
+
+.exec-button .button.exec:hover {
+    background-color: var(--light-grey);
+    color: var(--dark-grey);
+}
+
+.a-content.left > div {
+    height: 45px;
+    width: 100%;
+}
+
+.a-content.left .config {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.a-content.left .config p, .a-content.left .config .spinner {
+    flex: 50%;
+}
+
+.a-content.left .config .spinner {
+    flex: 50%;
+}
+
+.a-content.left .config p {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.a-content.right {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.a-content.left .config.key-list {
+    display: block;
+}
+
+.a-content.left .config.key-list .object-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.a-content.left .config.key-list .object-list button {
+    background-color: var(--blue-grey);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    top: 0;
+    height: 30px;
+    width: 30px;
+}
+
+.a-content.left .config.key-list .object-list button:focus {
+    outline: none;
+}
+
+.a-content.left .config.key-list .view {
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.a-content.left .config.key-list .view#key-list .key {
+    height: fit-content;
+    width: 100%;
+    display: block;
+}
+
+.a-content.left .config.key-list .view#key-list .key {
+    margin-bottom: 0.5rem;
+}
+
+.a-content.left .config.key-list .view#key-list .key > * {
+    display: inline-block;
+}
+
+.a-content.left .config.key-list .view#key-list .key .key-config {
+    display: inline-block;
+}
+
+.a-content.left .config.key-list .view#key-list .key .key-config > * {
+    display: inline-block;
+    margin-left: 1rem; 
+}
+
+.a-content.left .config.key-list .view#key-list .key .key-config input {
+    width: 100px;
+}
+
+.a-content.left .config.key-list .view#key-list .key .key-config.height {
+    margin-left: 10px;
+}
+
+.matrix-list {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+}
+
+.matrix-list .matrix-element {
+    display: inline-block;
+}
+
+.matrix-list .matrix-element p {
+    font-size: 1rem;
+}
+
+.matrix-list .matrix-element p.a-name {
+    text-align: center !important;
+}
+
+.matrix-list .matrix-element ~ .matrix-element {
+    margin-left: 1rem;
+}
+
+.solution-list #solution-a {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.a-content.right {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+.a-content.right .solution-view {
+    position: relative;
+    overflow: auto;
+}
+
+.a-content.right .ar-table-div p {
+    margin: 0;
+}
+
+.a-content.right .ar-table-div table th, .a-content.right .ar-table-div table td {
+    text-align: center;
+    padding: 0.5rem;
+    height: 40px;
+    width: 70px;
+    max-width: 40px;
+    min-width: 40px;
+    max-height: 40px;
+    max-width: 70px;
+}
+
+.a-content.right .team-a .solution-view .ar-table-view table > * {
+    text-align: center;
+}
+
+.table-bordered, .table-bordered td, .table-bordered th {
+    border: 1px solid var(--blue-grey);
+}
+
+.table-bordered, .table-bordered td.empty {
+    border: none;
+}
+
+.a-content.right .team-a .solution-view .ar-table-view .m-head, 
+.a-content.right .team-a .solution-view .ar-table-view .m-col-head {
+    background-color: var(--blue-grey);
+}
+
+.a-content.right .team-a .solution-view .ar-table-view table p {
+    text-align: center;
+}
+
+.a-content.right .exec-button {
+    height: 50px;
+}
+
+.a-content.right .exec-button .table-view {
+    width: 100%;
+}
+
+.a-content.right .exec-button .table-view {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.a-content.right .exec-button .button.exec {
+    padding: 0.5rem;
+    height: fit-content;
+}
+
+.view.non-display {
+    display: none;
+}

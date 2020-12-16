@@ -1,15 +1,21 @@
+// Para guardar los datos de una llave
 type Key = {
     code: string,
     height: number,
     prob: number
 };
 
+// Para crear una estructura de árbol
 type Node = {
     value: number,
     left: Node,
     right: Node
 }
 
+/**
+ * Clase que permite la ejecución del algoritmo para conseguir el árbol binario
+ * de búsqueda óptimo.
+ */
 export class ArbolesBinarios {
     keys: any[] = [];
     orderedKeys: any[] = [];
@@ -23,6 +29,17 @@ export class ArbolesBinarios {
         this.getProbs();
     }
 
+    /**
+     * El algoritmo realiza:
+     *  1) Crea las matrices A y R con valores por defecto.
+     *  2) Inicializa los valores triviales de la matriz
+     *  3) Para cada p (diferencia entre una llave y otra 1, 2 -> p = 2) para ir por diagonales
+     *      para cada i desde 1 hasta n;
+     *          si i + p <= n entonces
+     *              j = i + p
+     *              * con el j ya podemos buscar los resultados para cada k desde i hasta j
+     *              * escoger el mínimo y setear los valores de A y R
+     */
     execute() {
         let n: number = this.orderedKeys.length;
         // +2 because we need a row 0 that is not used but need for indexing
@@ -46,20 +63,36 @@ export class ArbolesBinarios {
         this.R.shift();
     }
 
+    /**
+     * Esta función permite conocer los valores del algoritmo de cada k desde i hasta j.
+     * @param keys Llaves del árbol
+     * @param A Matriz resultado
+     * @param i posición i de las llaves
+     * @param j posición j de las llaves
+     */
     search_ks(keys: any[], A: number[][], i: number, j: number) {
-        let ks = []
-        let probs_sum = 0;
+        let ks = [] // Para guardar los ks resultado
+        let probs_sum = 0; // Para conseguir la suma de probabilidades desde i hasta j (inclusivo)
         for (let k = i; k < j + 1; k++) {
             probs_sum += Number(keys[k - 1].prob);
         }
-        for (let k = i; k < j + 1; k++) { // + 2 -> 1 because we have (j - i) + 1 k's... 1 -> because we need it inclusive    
+        for (let k = i; k < j + 1; k++) { // + 1 -> 1 because we have (j - i) + 1 k's... 1 -> because we need it inclusive    
             let res = A[i][k - 1] + A[k + 1][j] + probs_sum;
-            res = Math.round(res * 10000.0) / 10000.0;
+            res = Math.round(res * 10000.0) / 10000.0; // Para redondear a 4 decimales
             ks.push(res);
         }
         return ks
     }
 
+    /**
+     * Inicializa los valores triviales de la matriz. Es decir, la diagonal en 0 y la siguiente diagonal
+     * con los valores de cada probabilidad de cada llave, además, también setea estos valores por defecto en
+     * la matriz R, es decir, 0 en la diagonal y el número de llave correspondiente en la siguietne diagonal.
+     * @param keys Lista de llaves
+     * @param A Matriz resultado
+     * @param R Matriz R
+     * @param n cantidad de llaves más 1
+     */
     init_values(keys: any[], A: number[][], R: number[][], n: number) {
         for (let i = 1; i < n; i++) {
             A[i][i - 1] = 0;
@@ -71,6 +104,11 @@ export class ArbolesBinarios {
         R[n][n - 1] = 0;
     }
 
+    /**
+     * Crea una matriz con valor "" en cada celda
+     * @param n número de filas
+     * @param m número de columnas
+     */
     create_matrix(n: number, m: number) {
         let matrix = [];
         for (let i = 0; i < n; i++) {
@@ -79,6 +117,9 @@ export class ArbolesBinarios {
         return matrix;
     }
 
+    /**
+     * Ordena las llaves en orden ascendente (lexicográfico)
+     */
     orderKeys() {
         this.orderedKeys.sort((a, b) => {
             if (a === b) {
@@ -88,6 +129,10 @@ export class ArbolesBinarios {
         });
     }
 
+    /**
+     * Obtiene las probabilidades para cada llave haciendo el cálculo con la
+     * cantidad total de los pesos.
+     */
     getProbs() {
         let allHeights = 0;
         this.orderedKeys.forEach(key => allHeights += Number(key.height));
@@ -110,6 +155,10 @@ export class ArbolesBinarios {
         return min;
     }
 
+    /**
+     * Crea una estructura de árbol analizando la tabla R del algoritmo.
+     * @param RTable Tabla R
+     */
     getBinaryTreeArray(RTable: number[][]) {
         let root = RTable[0][RTable[0].length - 1];
         let tree = {
@@ -120,6 +169,14 @@ export class ArbolesBinarios {
         return tree;
     }
 
+    /**
+     * Método auxiliar y recursivo para crear un nodo a partir del análisis de la tabla R
+     * y una posición i y j en la matriz. Recursiva al utilizar una llamada a sí misma para averiguar los hijos
+     * derecho e izquierdo de un nodo.
+     * @param RTable 
+     * @param i 
+     * @param j 
+     */
     getBinaryTreeArrayAux(RTable, i, j) {
         let newK = RTable[i - 1][j];
         if (newK == 0) {

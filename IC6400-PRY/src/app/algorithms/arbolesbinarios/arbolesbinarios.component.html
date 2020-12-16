@@ -46,11 +46,11 @@
                         <p>Llave <strong>#{{i + 1}} &#x2192; </strong></p>
                         <div class="key-config code">
                             <p>Código:</p>
-                            <input placeholder="Código" name="C" [(ngModel)]="key.code">
+                            <input placeholder="Código" name="C" [(ngModel)]="key.code" (change)="validateCode(key)">
                         </div>
                         <div class="key-config height">
                             <p>Peso:</p>
-                            <input placeholder="Peso" name="V" [(ngModel)]="key.height"
+                            <input placeholder="Peso" name="V" [(ngModel)]="key.height" (change)="validateHeight(key)"
                                 onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46'>
                         </div>
                     </div>

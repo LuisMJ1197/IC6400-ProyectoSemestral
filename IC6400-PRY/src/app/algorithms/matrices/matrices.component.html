@@ -1,1 +1,134 @@
-<app-notimplemented></app-notimplemented>
+<app-header-menu></app-header-menu>
+<div id="main">
+    <div id="algorithm-header">
+        <div class="first algorithm-comp">
+            <span class="option-icon flaticon-matrix"></span>
+            <p>Multiplicación de Matrices</p>
+        </div>
+        <div class="last algorithm-comp">
+            <div class="button load">
+                <span class="label">
+                    <i class="fas fa-upload"></i>Cargar archivo
+                </span>
+                <input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File"
+                    (change)="onFileSelect($event)">
+            </div>
+            <button id="save-button" type="button" class="button save" (click)="saveFile()">
+                <i class="fas fa-save"></i>Guardar archivo
+            </button>
+        </div>
+    </div>
+    <div id="algorithm-content">
+        <div class="a-content left">
+            <div class="config">
+                <p>Número de matrices (n): </p>
+                <div class="spinner">
+                    <div class="plusminus horiz">
+                        <button [disabled]="matrixQ == minMatrixQ" (click)="removeMatrix()"></button>
+                        <input disabled type="number" name="matrixQ" value="0" min="minMatrixQ" [(ngModel)]="matrixQ">
+                        <button [disabled]="matrixQ == 10" (click)="addMatrix()"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="config key-list">
+                <div class="object-list">
+                    <p *ngIf="!solutionView">Lista de dimensiones:</p>
+                    <p *ngIf="solutionView">Solución:</p>
+                    <button tooltip="Ver solución" class="change-view" *ngIf="!solutionView"
+                        (click)="solutionView = true">
+                        A<sub>i</sub>
+                    </button>
+                    <button class="change-view" *ngIf="solutionView" (click)="solutionView = false">
+                        <i class="flaticon-list"></i>
+                    </button>
+                </div>
+                <div class="view" id="key-list" [ngClass]="solutionView ? 'non-display' : ''">
+                    <div>
+                        <div class="key" *ngFor="let dim of dimensionList;">
+                            <p><strong>d<sub>{{dim.num}}</sub> &#x2192; </strong></p>
+                            <div class="key-config code">
+                                <p>Valor:</p>
+                                <input placeholder="Dim value" name="C" [(ngModel)]="dim.value"
+                                    onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                    (change)="validateDim(dim)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="view" [ngClass]="!solutionView ? 'non-display' : ''">
+                    <div>
+                        <p>Lista de matrices:</p>
+                        <div class="matrix-list">
+                            <div class="matrix-element" *ngFor="let matrix of getMatrix(); let i = index;">
+                                <p class="a-name">
+                                    {{matrix}}<sub>{{i + 1}}</sub>
+                                </p>
+                                <div style="display: flex; justify-content: space-evenly;">
+                                    <p style="font-size: 0.8rem;">{{dimensionList[i].value}} x {{dimensionList[i +
+                                        1].value}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem;">Forma de multiplicar:</p>
+                        <div class="matrix-list solution-list">
+                            <div class="matrix-element" *ngFor="let matrix of getMatrix(); let i = index;">
+                                <p class="a-name" id="solution-a">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="exec-button">
+                <button type="button" class="button exec" (click)="executeAlgorithm()">
+                    Ejecutar algoritmo
+                </button>
+            </div>
+        </div>
+        <div class="a-content right">
+            <div class="cont solution-view">
+                <div class="ar-table-div" *ngIf="tableMView">
+                    <p>Tabla M:</p>
+                    <table class="table table-bordered" style="width:100%">
+                        <thead>
+                            <tr class="m-row header">
+                                <td class="label-b empty"></td>
+                                <th class="m-head" *ngFor="let row of M; let i = index;">{{i + 1}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="m-row" *ngFor="let row of M ; let i = index">
+                                <th class="m-col-head">{{i + 1}}</th>
+                                <td class="m-col" *ngFor="let col of row">{{col}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ar-table-div" *ngIf="!tableMView">
+                    <p>Tabla P:</p>
+                    <table class="table table-bordered" style="width:100%">
+                        <thead>
+                            <tr class="m-row header">
+                                <td class="label-b empty"></td>
+                                <th class="m-head" *ngFor="let row of P; let i = index;">{{i + 1}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="m-row" *ngFor="let row of P ; let i = index">
+                                <th class="m-col-head">{{i + 1}}</th>
+                                <td class="m-col" *ngFor="let col of row">{{col}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="exec-button">
+                <div class="table-view">
+                    <button type="button" class="button exec" (click)="tableMView = !tableMView">
+                        {{tableMView ? 'Ver tabla P' : 'Ver tabla M'}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

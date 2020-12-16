@@ -324,11 +324,11 @@
 }
 
 .table-bordered, .table-bordered td, .table-bordered th {
-    border: 1px solid var(--blue-grey);
+    border: 1px solid var(--blue-grey) !important;
 }
 
 .table-bordered, .table-bordered td.empty {
-    border: none;
+    border: none !important;
 }
 
 .a-content.right .team-a .solution-view .ar-table-view .m-head, 
@@ -482,4 +482,14 @@ right connector from last child*/
 
 .non-display {
     display: none;
+}
+
+@media (orientation: portrait) {
+    #algorithm-content {
+        display: block;
+    }
+
+    #main {
+        overflow: auto;
+    }
 }
