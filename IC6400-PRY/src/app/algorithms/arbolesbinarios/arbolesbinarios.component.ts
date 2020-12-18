@@ -68,6 +68,10 @@ export class ArbolesbinariosComponent implements OnInit {
 	loadFile(file) {
 		if (file.keys == null) {
 			alert("El archivo no tiene el formato correcto.");
+		} else if (!Array.isArray(file.keys)) {
+			alert("El archivo no tiene el formato correcto.");
+		} else if(file.keys.length < 1) {
+			alert("El archivo no tiene el formato correcto. Debe de haber mínimo 1 llave.");
 		} else {
 			this.keys = file.keys;
 			this.keyQ = this.keys.length;

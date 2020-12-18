@@ -56,6 +56,10 @@ export class MatricesComponent implements OnInit {
 	loadFile(file) {
 		if (file.dimensionList == null) {
 			alert("El archivo no tiene el formato correcto.");
+		} else if (!Array.isArray(file.dimensionList)) {
+			alert("El archivo no tiene el formato correcto.");
+		} else if(file.dimensionList.length < 3) {
+			alert("El archivo no tiene el formato correcto. Deben de haber mínimo 3 dimensiones.");
 		} else {
 			this.dimensionList = file.dimensionList;
 			this.matrixQ = this.dimensionList.length - 1;

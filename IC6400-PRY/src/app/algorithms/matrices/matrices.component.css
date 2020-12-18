@@ -373,6 +373,6 @@
     height: fit-content;
 }
 
-.view.non-display {
+.non-display {
     display: none;
 }
